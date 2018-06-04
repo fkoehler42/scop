@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/04 17:16:40 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/04 18:53:49 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME = scop
 SRC =	error.c \
 		init.c \
 		main.c \
-		parsing.c \
+		parse.c \
+		render.c \
 		store.c \
 		window_events.c
 

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 17:48:41 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:05:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_window(t_win *win, char *model_name)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwSetKeyCallback(win->win, &key_callback);
 	glfwMakeContextCurrent(win->win);
+	glViewport(0, 0, WIN_W, WIN_H);
 	win->w = WIN_W;
 	win->h = WIN_H;
 }

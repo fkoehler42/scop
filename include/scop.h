@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 17:47:12 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 20:02:51 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define WIN_W 800
 # define WIN_H 600
 
+# define VTX_SHADER "/shaders/basic.vert"
+
 typedef enum		e_errnum
 {
 	NB_ARG,
@@ -27,7 +29,8 @@ typedef enum		e_errnum
 	ALLOC,
 	MODEL_DATA,
 	GLFW_INIT,
-	WIN_CREAT
+	WIN_CREAT,
+	SH_COMPIL,
 }					t_errnum;
 
 typedef struct		s_file_buf
@@ -60,6 +63,14 @@ typedef struct		s_model
 	char			*name;
 }					t_model;
 
+typedef struct		s_buf_obj
+{
+	unsigned int	vbo_id;
+	unsigned int	vao_id;
+	unsigned int	ebo_id;
+	unsigned int	vtx_sh_id;
+}					t_buf_obj;
+
 typedef struct		s_win
 {
 	GLFWwindow		*win;
@@ -74,6 +85,8 @@ void				init_window(t_win *win, char *model_name);
 int					handle_file(char *path, t_model *model);
 void				store_vertex(char **data, t_vtx **array, unsigned int *nb_vtx);
 void				store_face(char **data, t_face **array, unsigned int *nb_face);
+
+void				generate_buf_obj(t_model *model);
 
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);

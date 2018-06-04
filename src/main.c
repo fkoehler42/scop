@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 17:51:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 20:15:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(int ac, char **av)
 	if (handle_file(av[1], &model) < 0)
 		return (EXIT_FAILURE);
 	init_window(&win, model.name);
+	generate_buf_obj(&model);
 	while (!glfwWindowShouldClose(win.win))
 	{
 		glfwSwapBuffers(win.win);
