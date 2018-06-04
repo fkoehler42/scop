@@ -6,12 +6,11 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:14:47 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 14:56:02 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:52:16 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-
 
 static void	parse_data(FILE *fs, t_model *model)
 {
@@ -33,7 +32,7 @@ static void	parse_data(FILE *fs, t_model *model)
 		else if (buf_len > 1 && buf[0] == 'f' && buf[1] == ' ')
 		{
 			split = ft_strsplit(buf, ' ');
-			store_face(split, model->f_array, &(model->nb_vtx));
+			store_face(split, model->f_array, &(model->nb_face));
 			free_tab(split);
 		}
 	}
@@ -78,7 +77,7 @@ int			handle_file(char *path, t_model *model)
 		fclose(fs);
 		return (-1);
 	}
-	model->name = strrchr(path, '/');
+	model->name = strrchr(path, '/') + 1;
 	model->v_array = (t_vtx **)malloc(sizeof(t_vtx *) * model->nb_vtx);
 	model->f_array = (t_face **)malloc(sizeof(t_face *) * model->nb_face);
 	if (!model->v_array || !model->f_array)

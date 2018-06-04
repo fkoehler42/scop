@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/04 14:46:59 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/04 17:16:40 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =	error.c \
 		main.c \
 		parsing.c \
 		store.c \
+		window_events.c
 
 vpath %.c ./src
 
@@ -75,6 +76,6 @@ fclean: clean
 	-@make fclean -C $(LIBFT_PATH)
 	@echo "\033[0;32mLibft cleaned.\033[0;m"
 	-@make clean -C $(GLFW_PATH)
-	@echo "\033[0;32mglfw cleaned.\033[0;m"
+	@echo "\033[0;32mglfw.a deleted.\033[0;m"
 
 re : fclean all

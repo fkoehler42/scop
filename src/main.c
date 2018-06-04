@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 14:48:32 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:51:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		main(int ac, char **av)
 	t_model	model;
 	t_win	win;
 
-	(void)win;
 	if (ac != 2)
 	{
 		put_error(NB_ARG, NULL);
@@ -26,5 +25,14 @@ int		main(int ac, char **av)
 	init_model(&model);
 	if (handle_file(av[1], &model) < 0)
 		return (EXIT_FAILURE);
+	init_window(&win, model.name);
+	while (!glfwWindowShouldClose(win.win))
+	{
+		glfwSwapBuffers(win.win);
+		glfwPollEvents();
+	}
+	// free allocated stuffs
+	glfwDestroyWindow(win.win);
+	glfwTerminate();
 	return (0);
 }
