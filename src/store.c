@@ -6,29 +6,63 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:27:37 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 12:16:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 15:05:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	store_vertex(char **data, t_vtx **v_array, unsigned int *nb_vtx) {
-	static int	vtx_idx = 0;
+void	store_vertex(char **data, t_vtx **array, unsigned int *nb_vtx)
+{
+	static unsigned int	vtx_idx = 0;
 	int			i;
 
-	while (data[i++]);
+	//printf("nb de vertex : %u, index : %u\n", *nb_vtx, vtx_idx);
+	i = 0;
+	while (data[i])
+		i++;
 	if (i != 4) {
-		ft_putendl_fd("scop: Vertex from file not well formatted", 2);
-		free(v_array[*nb_vtx - 1]);
-		*nb_vtx--;
+		ft_putendl_fd("scop: A vertex is ignored (bad format)", 2);
+		free(array[*nb_vtx - 1]);
+		(*nb_vtx)--;
 		return ;
 	}
-	if (!(v_array[vtx_idx] = (t_vtx*)malloc(sizeof(t_vtx)))) {
+	if (!(array[vtx_idx] = (t_vtx*)malloc(sizeof(t_vtx))))
+	{
 		put_error(ALLOC, NULL);
 		exit(EXIT_FAILURE);
 	}
-	v_array[vtx_idx]->x = strtof(data[1], NULL);
-	v_array[vtx_idx]->y = strtof(data[2], NULL);
-	v_array[vtx_idx]->z = strtof(data[3], NULL);
+	array[vtx_idx]->x = strtof(data[1], NULL);
+	array[vtx_idx]->y = strtof(data[2], NULL);
+	array[vtx_idx]->z = strtof(data[3], NULL);
 	vtx_idx++;
+}
+
+void	store_face(char **data, t_face **array, unsigned int *nb_face)
+{
+	static unsigned int	f_idx = 0;
+	int			i;
+
+	printf("nb de faces : %u, index : %u\n", *nb_face, f_idx);
+	i = 0;
+	while (data[i])
+		i++;
+	if (i < 4 || i > 5)
+	{
+		ft_putendl_fd("scop: A face is ignored (bad format)", 2);
+		free(array[*nb_face - 1]);
+		(*nb_face)--;
+		return ;
+	}
+	--i;
+	if (!(array[f_idx] = (t_face*)malloc(sizeof(t_face))) ||
+	!(array[f_idx]->v_id = (unsigned int *)malloc(sizeof(unsigned int) * i)))
+	{
+		put_error(ALLOC, NULL);
+		exit(EXIT_FAILURE);
+	}
+	array[f_idx]->nb_vtx = i;
+	while (--i >= 0)
+		array[f_idx]->v_id[i] = ft_atoi(data[i + 1]);
+	f_idx++;
 }

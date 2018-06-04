@@ -6,17 +6,20 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/05/31 18:48:34 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 14:48:32 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		main(int ac, char **av) {
+int		main(int ac, char **av)
+{
 	t_model	model;
 	t_win	win;
 
-	if (ac != 2) {
+	(void)win;
+	if (ac != 2)
+	{
 		put_error(NB_ARG, NULL);
 		return (EXIT_FAILURE);
 	}

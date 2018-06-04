@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:54:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/05/31 19:02:53 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 14:47:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_error(t_errnum err, char *str) {
 	ft_putstr_fd("scop: ", 2);
-	if (err == N_ARG)
+	if (err == NB_ARG)
 		ft_putendl_fd("One (and only one) argument is expected", 2);
 	else if (err == OPEN || err == ALLOC)
 		perror(str);
