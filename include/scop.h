@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/05/31 19:03:01 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 11:24:01 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum		e_errnum {
 	NB_ARG,
 	OPEN,
 	ALLOC,
-	MODEL_DATA,
+	MODEL_DATA
 }					t_errnum;
 
 typedef struct		s_file_buf {

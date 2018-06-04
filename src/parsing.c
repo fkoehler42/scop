@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:14:47 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/05/31 19:03:22 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/04 12:11:20 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,15 @@ static void	parse_data(FILE *fs, t_model *model) {
 	buf_cap = 0;
 	while ((buf_len = getline(&buf, &buf_cap, fs)) > 0) {
 		if (buf_len > 1 && buf[0] == 'v' && buf[1] == ' ')
-			model->nb_vtx++;
+			store_vertex(ft_strsplit(buf), model->v_array, &(model->nb_vtx));
 		else if (buf_len > 1 && buf[0] == 'f' && buf[1] == ' ')
 			model->nb_face++;
 	}
 	free(buf);
-	if (model->nb_vtx < 3 || !model->nb_face) {
-		put_error(MODEL_DATA);
-		return (-1);
-	}
+	return (-1);
 }
 
-static int	parse_file(FILE *fs, t_model *model) {
+static int	parse_file(FILE *fs, unsigned int *nb_vtx, unsigned int *nb_face) {
 	char	*buf;
 	size_t	buf_cap;
 	ssize_t	buf_len;
@@ -42,12 +39,12 @@ static int	parse_file(FILE *fs, t_model *model) {
 	buf_cap = 0;
 	while ((buf_len = getline(&buf, &buf_cap, fs)) > 0) {
 		if (buf_len > 1 && buf[0] == 'v' && buf[1] == ' ')
-			model->nb_vtx++;
+			*nb_vtx++;
 		else if (buf_len > 1 && buf[0] == 'f' && buf[1] == ' ')
-			model->nb_face++;
+			*nb_face++;
 	}
 	free(buf);
-	if (model->nb_vtx < 3 || !model->nb_face) {
+	if (*nb_vtx < 3 || *nb_face) {
 		put_error(MODEL_DATA);
 		return (-1);
 	}
@@ -61,7 +58,7 @@ int			handle_file(char *path, t_model *model) {
 		put_error(OPEN, arg);
 		return (-1);
 	}
-	if (parse_file(fs, model) < 0) {
+	if (parse_file(fs, &(model->nb_vtx), &(model->nb_face)) < 0) {
 		fclose(fs);
 		return (-1);
 	}
@@ -73,6 +70,7 @@ int			handle_file(char *path, t_model *model) {
 		fclose(fs);
 		return (-1);
 	}
+	rewind(fs);
 	parse_data(fs, &model);
 	return (0);
 }
