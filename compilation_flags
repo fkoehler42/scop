@@ -1,1 +1,0 @@
--framework AppKit -framework OpenGL -framework IOKit -framework CoreVideo -I ./lib/glfw/include -L ./lib/glfw/src -lglfw3
