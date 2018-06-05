@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/05 17:11:41 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/05 18:11:35 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LIBFT = $(LIBFT_PATH)libft.a
 OPATH = ./obj/
 INC = ./include/
 
-LIBFT_PATH = ./lib/libft/
+LIBFT_PATH = ./libft/
 LIBFT_INC = $(LIBFT_PATH)includes/
 
 ## COMPILATION
@@ -67,7 +67,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[0;32mExecutable deleted !\033[0;m"
+	@echo "\033[0;32m$(NAME) executable deleted !\033[0;m"
 	-@make fclean -C $(LIBFT_PATH)
 	@echo "\033[0;32mLibft cleaned.\033[0;m"
 

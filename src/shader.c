@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 10:55:02 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 16:41:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 18:08:59 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static char		*get_shader_src(char *src_file)
 	rewind(fs);
 	if (fread(shader_src, size, 1, fs) != 1)
 		exit_error(READ, final_path);
+	shader_src[size] = '\0';
 	if (fclose(fs) != 0)
 		put_error(CLOSE, final_path);
 	free(final_path);
