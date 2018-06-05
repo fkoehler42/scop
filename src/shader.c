@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 10:55:02 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 12:16:52 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 12:55:08 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-char			*get_shader_src(char *src_file)
+static char		*get_shader_src(char *src_file)
 {
 	FILE				*fs;
 	long				size;

@@ -6,12 +6,14 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 12:06:58 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:39:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
+
+# define GLFW_INCLUDE_GLCOREARB
 
 # include "../lib/libft/includes/libft.h"
 # include <GLFW/glfw3.h>
@@ -65,13 +67,13 @@ typedef struct		s_model
 	char			*name;
 }					t_model;
 
-typedef struct		s_gl_bufs
+typedef struct		s_gl_objs
 {
 	unsigned int	vbo_id;
 	unsigned int	vao_id;
 	unsigned int	ebo_id;
 	unsigned int	vtx_sh_id;
-}					t_gl_bufs;
+}					t_gl_objs;
 
 typedef struct		s_win
 {
@@ -88,8 +90,8 @@ int					handle_file(char *path, t_model *model);
 void				store_vertex(char **data, t_vtx **array, unsigned int *nb_vtx);
 void				store_face(char **data, t_face **array, unsigned int *nb_face);
 
-void				generate_buf_objs(t_model *model);
-void				generate_vtx_shader(unsigned int *vertex_shader_id);
+void				generate_gl_objs(t_model *model);
+unsigned int		generate_shader(char *shader_file, int shader_type);
 
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);
