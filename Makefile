@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/04 18:53:49 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/05 11:57:41 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,11 @@
 NAME = scop
 
 SRC =	error.c \
+		gl_buffers.c \
 		init.c \
 		main.c \
 		parse.c \
-		render.c \
+		shader.c \
 		store.c \
 		window_events.c
 
