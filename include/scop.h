@@ -6,18 +6,26 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 13:39:56 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 17:13:29 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
 
+/*
+* Include <OpenGL/gl3.h> instead of <OpenGL/gl.h> in GLFW
+*/
 # define GLFW_INCLUDE_GLCOREARB
 
+/*
+* Include <OpenGL/gl3ext.h> in GLFW
+*/
+//# define GLFW_INCLUDE_GLEXT
+
 # include "../lib/libft/includes/libft.h"
-# include <GLFW/glfw3.h>
 # include <stdio.h>
+# include <GLFW/glfw3.h>
 
 # define WIN_W 800
 # define WIN_H 600

@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/05 13:41:08 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/05 17:11:41 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ OBJ = $(SRC:.c=.o)
 O2 = $(addprefix $(OPATH), $(OBJ))
 
 LIBFT = $(LIBFT_PATH)libft.a
-GLFW = $(GLFW_PATH)src/libglfw3.a
 
 ## DIRECTORIES
 
@@ -39,34 +38,28 @@ INC = ./include/
 LIBFT_PATH = ./lib/libft/
 LIBFT_INC = $(LIBFT_PATH)includes/
 
-GLFW_PATH = ./lib/glfw/
-GLFW_INC = $(GLFW_PATH)$(INC)
-
 ## COMPILATION
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-FLAGS_OPENGL = -framework AppKit -framework OpenGL -framework IOKit -framework CoreVideo
+GLFW_LIB = `pkg-config --static --libs glfw3` -framework OpenGL
+GLFW_INC = `pkg-config --cflags-only-I glfw3`
 
 ## PROCESS
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(GLFW) $(O2)
-	@$(CC) $(FLAGS) $(FLAGS_OPENGL) $(O2) -L $(LIBFT_PATH) -L $(GLFW_PATH)src -lft -lglfw3 \
-	-I $(LIBFT_INC) -I $(GLFW_INC) -I $(INC) -o $@
+$(NAME): $(LIBFT) $(O2)
+	@$(CC) $(FLAGS) $(O2) -I $(LIBFT_INC) -I $(INC) $(GLFW_INC) -L $(LIBFT_PATH) -lft $(GLFW_LIB) -o $@
 	@echo "\033[0;34m$(NAME) compilation done !\033[0;m"
+
 
 $(LIBFT):
 	@echo "\033[0;32mPlease wait while libft is compiled...\033[0;m"
 	@make -C $(LIBFT_PATH)
 
-$(GLFW):
-	@echo "\033[0;32mPlease wait while glfw is compiled...\033[0;m"
-	@make -C $(GLFW_PATH)
-
 $(OPATH)%.o: %.c
-	@gcc $(FLAGS) -I $(INC) -I $(LIBFT_INC) -I $(GLFW_INC) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INC) -I $(LIBFT_INC) $(GLFW_INC) -o $@ -c $<
 
 clean:
 	@rm -f $(O2)
@@ -77,7 +70,5 @@ fclean: clean
 	@echo "\033[0;32mExecutable deleted !\033[0;m"
 	-@make fclean -C $(LIBFT_PATH)
 	@echo "\033[0;32mLibft cleaned.\033[0;m"
-	-@make clean -C $(GLFW_PATH)
-	@echo "\033[0;32mglfw.a deleted.\033[0;m"
 
 re : fclean all

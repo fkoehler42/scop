@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 12:57:49 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 16:50:30 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static unsigned int	generate_vbo(t_vtx **vtx, unsigned int nb_vtx)
 void				generate_gl_objs(t_model *model)
 {
 	t_gl_objs	gl_objs;
-	
+
 	gl_objs.vbo_id = generate_vbo(model->v_array, model->nb_vtx);
 	gl_objs.vtx_sh_id = generate_shader(VTX_SHADER, GL_VERTEX_SHADER);
 }
