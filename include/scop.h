@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 18:11:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 18:20:01 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define WIN_W 800
 # define WIN_H 600
 
+# define FRAG_SHADER "simple.frag"
 # define VTX_SHADER "basic.vert"
 
 typedef enum		e_errnum
@@ -81,6 +82,7 @@ typedef struct		s_gl_objs
 	unsigned int	vao_id;
 	unsigned int	ebo_id;
 	unsigned int	vtx_sh_id;
+	unsigned int	frag_sh_id;
 }					t_gl_objs;
 
 typedef struct		s_win
