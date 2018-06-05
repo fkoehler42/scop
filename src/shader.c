@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 10:55:02 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 18:08:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 18:44:43 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,29 @@ unsigned int	generate_shader(char *shader_file, int shader_type)
 	if (!(sh_compil_success))
 	{
 		glGetShaderInfoLog(shader_id, 512, NULL, error_log);
-		exit_error(SH_COMPIL, error_log);
+		exit_error(SHADER_CREAT, error_log);
 	}
 	return (shader_id);
+}
+
+unsigned int	generate_shader_program(unsigned int vertex_shader,
+unsigned int fragment_shader)
+{
+	int				shader_link_success;
+	char			error_log[512];
+	unsigned int	shader_program_id;
+
+	shader_program_id = glCreateProgram();
+	glAttachShader(shader_program_id, vertex_shader);
+	glAttachShader(shader_program_id, fragment_shader);
+	glLinkProgram(shader_program_id);
+	glGetProgramiv(shader_program_id, GL_LINK_STATUS, &shader_link_success);
+	if (!(shader_link_success))
+	{
+		glGetProgramInfoLog(shader_program_id, 512, NULL, error_log);
+		exit_error(SHADER_CREAT, error_log);
+	}
+	return (shader_program_id);
+	glDeleteShader(vertex_shader);
+	glDeleteShader(fragment_shader);
 }

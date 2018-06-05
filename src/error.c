@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:54:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 11:51:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 18:39:20 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	put_error(t_errnum err, char *str)
 		ft_putendl_fd("An error has occured during GLFW initialization", 2);
 	else if (err == WIN_CREAT)
 		ft_putendl_fd("An error has occured during GLFW Window creation", 2);
-	else if (err == SH_COMPIL)
+	else if (err == SHADER_CREAT)
 	{
-		ft_putstr_fd("Shader compilation error: ", 2);
+		ft_putstr_fd("Shader compilation / linkage error: ", 2);
 		ft_putendl_fd(str, 2);
 	}
 }
