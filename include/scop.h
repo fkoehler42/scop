@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 19:13:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/05 19:54:28 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					handle_file(char *path, t_model *model);
 void				store_vertex(char **data, t_vtx **array, unsigned int *nb_vtx);
 void				store_face(char **data, t_face **array, unsigned int *nb_face);
 
-void				generate_gl_objs(t_model *model, t_gl_objs *gl_objs);
+unsigned int		generate_gl_objs(t_model *model, t_gl_objs *gl_objs);
 unsigned int		generate_shader_program(unsigned int vertex_shader,
 					unsigned int fragment_shader);
 unsigned int		generate_shader(char *shader_file, int shader_type);
