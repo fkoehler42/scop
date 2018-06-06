@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 19:52:27 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/06 12:01:39 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ unsigned int		generate_gl_objs(t_model *model, t_gl_objs *gl_objs)
 	gl_objs->frag_shader);
 	gl_objs->vtx_shader = 0;
 	gl_objs->frag_shader = 0;
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)0); // normalization needed ? (GL_TRUE)
 	glEnableVertexAttribArray(0);
 	return (nb_elems);
 }
