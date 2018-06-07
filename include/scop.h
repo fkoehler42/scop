@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/06 12:36:20 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/07 11:46:34 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,8 @@
 */
 # define GLFW_INCLUDE_GLCOREARB
 
-/*
-* Include <OpenGL/gl3ext.h> in GLFW
-*/
-//# define GLFW_INCLUDE_GLEXT
-
-# include "../libft/includes/libft.h"
+# include "../lib/libft/includes/libft.h"
 # include <stdio.h>
-# include <math.h>
 # include <GLFW/glfw3.h>
 
 # define WIN_W 1024

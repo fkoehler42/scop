@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/06 12:36:43 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/07 11:47:28 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LIBFT = $(LIBFT_PATH)libft.a
 OPATH = ./obj/
 INC = ./include/
 
-LIBFT_PATH = ./libft/
+LIBFT_PATH = ./lib/libft/
 LIBFT_INC = $(LIBFT_PATH)includes/
 
 ## COMPILATION
@@ -50,7 +50,7 @@ GLFW_INC = `pkg-config --cflags-only-I glfw3`
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(O2)
-	@$(CC) $(FLAGS) $(O2) -I $(LIBFT_INC) -I $(INC) $(GLFW_INC) -L $(LIBFT_PATH) -lft -lm $(GLFW_LIB) -o $@
+	@$(CC) $(FLAGS) $(O2) -I $(LIBFT_INC) -I $(INC) $(GLFW_INC) -L $(LIBFT_PATH) -lft $(GLFW_LIB) -o $@
 	@echo "\033[0;34m$(NAME) compilation done !\033[0;m"
 
 
