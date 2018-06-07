@@ -15,6 +15,9 @@ scop
 # Temp files
 *.swp
 
+# Editors
+.vscode
+
 # System files
 .DS_Store
 ._.DS_Store

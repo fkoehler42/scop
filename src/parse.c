@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:14:47 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/04 17:52:16 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:26:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			handle_file(char *path, t_model *model)
 		return (-1);
 	}
 	model->name = strrchr(path, '/') + 1;
-	model->v_array = (t_vtx **)malloc(sizeof(t_vtx *) * model->nb_vtx);
+	model->v_array = (t_vec3 **)malloc(sizeof(t_vec3 *) * model->nb_vtx);
 	model->f_array = (t_face **)malloc(sizeof(t_face *) * model->nb_face);
 	if (!model->v_array || !model->f_array)
 	{

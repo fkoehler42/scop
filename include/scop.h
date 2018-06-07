@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/07 11:46:34 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:56:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define GLFW_INCLUDE_GLCOREARB
 
 # include "../lib/libft/includes/libft.h"
+# include "../lib/libmat/include/libmat.h"
 # include <stdio.h>
 # include <GLFW/glfw3.h>
 
@@ -49,13 +50,6 @@ typedef struct		s_file_buf
 	ssize_t			str_len;
 }					t_buffer;
 
-typedef struct		s_vtx
-{
-	float			x;
-	float			y;
-	float			z;
-}					t_vtx;
-
 typedef struct		s_face
 {
 	unsigned int	*v_id;
@@ -66,7 +60,7 @@ typedef struct		s_model
 {
 	unsigned int	nb_vtx;
 	unsigned int	nb_face;
-	t_vtx			**v_array;
+	t_vec3			**v_array;
 	t_face			**f_array;
 	char			*name;
 }					t_model;
@@ -79,24 +73,27 @@ typedef struct		s_gl_objs
 	unsigned int	vtx_shader;
 	unsigned int	frag_shader;
 	unsigned int	shader_prog;
+	unsigned int	nb_elems;
 }					t_gl_objs;
 
-typedef struct		s_win
+typedef struct		s_env
 {
-	GLFWwindow		*win;
-	int				w;
-	int				h;
-}					t_win;
+	t_model			*model;
+	t_gl_objs		*gl_objs;
+	GLFWwindow		*window;
+	int				win_w;
+	int				win_h;
+}					t_env;
 
-
-void				init_model(t_model *model);
-void				init_window(t_win *win, char *model_name);
+t_model				*init_model();
+void				init_window(GLFWwindow **win, int *win_w, int *win_h,
+					char *model_name);
 
 int					handle_file(char *path, t_model *model);
-void				store_vertex(char **data, t_vtx **array, unsigned int *nb_vtx);
+void				store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx);
 void				store_face(char **data, t_face **array, unsigned int *nb_face);
 
-unsigned int		generate_gl_objs(t_model *model, t_gl_objs *gl_objs);
+t_gl_objs			*generate_gl_objs(t_model *model);
 unsigned int		generate_shader_program(unsigned int vertex_shader,
 					unsigned int fragment_shader);
 unsigned int		generate_shader(char *shader_file, int shader_type);
