@@ -6,28 +6,34 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/07 11:54:25 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/07 17:37:33 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/11 17:15:11 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-#SRC =
-
-.PHONY: all clean fclean re
-
-FLAGS = -Wall -Werror -Wextra
-
-# DIRECTORIES
-INC = ./include/
-OPATH = ./obj/
-vpath %.c ./src
-
 # FILES
+
 NAME = libmat.a
+
+SRC =	mat_mul.c \
+		new_mat.c \
+		new_vec.c
+
 OBJ = $(SRC:.c=.o)
 O2 = $(addprefix $(OPATH), $(OBJ))
 
+# DIRECTORIES
+
+vpath %.c ./src
+INC = ./include/
+OPATH = ./obj/
+
+# COMPILATION
+
+CC = gcc
+FLAGS = -Wall -Werror -Wextra
+
 # PROCESS
+
 all: $(NAME)
 
 $(NAME): $(O2)
@@ -36,7 +42,7 @@ $(NAME): $(O2)
 	@echo "\033[0;33mLibmat compilation done !\033[0;m"
 
 $(OPATH)%.o: %.c
-	@gcc $(FLAGS) -I $(INC) -c $< -o $@
+	@$(CC) $(FLAGS) -I $(INC) -c $< -o $@
 
 clean:
 	@rm -f $(O2)
@@ -47,3 +53,5 @@ fclean: clean
 	@echo "\033[0;33m$(NAME) deleted !\033[0;m"
 
 re: fclean all
+
+.PHONY: all clean fclean re

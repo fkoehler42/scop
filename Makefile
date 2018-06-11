@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/07 17:38:58 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/11 13:41:07 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ OBJ = $(SRC:.c=.o)
 O2 = $(addprefix $(OPATH), $(OBJ))
 
 LIBFT = $(LIBFT_PATH)libft.a
+LIBMAT = $(LIBMAT_PATH)libmat.a
 
 ## DIRECTORIES
 
@@ -52,14 +53,18 @@ GLFW_INC = `pkg-config --cflags-only-I glfw3`
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(O2)
-	@$(CC) $(FLAGS) $(O2) -I $(LIBFT_INC) -I $(LIBMAT_INC) -I $(INC) $(GLFW_INC) -L $(LIBFT_PATH) -lft $(GLFW_LIB) -o $@
+$(NAME): $(LIBFT) $(LIBMAT) $(O2)
+	@$(CC) $(FLAGS) $(O2) -I $(LIBFT_INC) -I $(LIBMAT_INC) -I $(INC) $(GLFW_INC) \
+	-L $(LIBFT_PATH) -L $(LIBMAT_PATH) -lft -lmat $(GLFW_LIB) -o $@
 	@echo "\033[0;34m$(NAME) compilation done !\033[0;m"
-
 
 $(LIBFT):
 	@echo "\033[0;32mPlease wait while libft is compiled...\033[0;m"
 	@make -C $(LIBFT_PATH)
+
+$(LIBMAT):
+	@echo "\033[0;32mPlease wait while libmat is compiled...\033[0;m"
+	@make -C $(LIBMAT_PATH)
 
 $(OPATH)%.o: %.c
 	@gcc $(FLAGS) -I $(INC) -I $(LIBFT_INC) -I $(LIBMAT_INC) $(GLFW_INC) -o $@ -c $<
@@ -73,7 +78,5 @@ fclean: clean
 	@echo "\033[0;32m$(NAME) executable deleted !\033[0;m"
 	-@make fclean -C $(LIBFT_PATH)
 	-@make fclean -C $(LIBMAT_PATH)
-	@echo "\033[0;32mLibft cleaned.\033[0;m"
-	@echo "\033[0;32mLibmat cleaned.\033[0;m"
 
 re : fclean all

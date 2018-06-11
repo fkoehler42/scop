@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/07 17:56:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/11 17:28:07 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct		s_model
 	unsigned int	nb_face;
 	t_vec3			**v_array;
 	t_face			**f_array;
+	t_mat4			*translate;
+	t_mat4			*rotate;
 	char			*name;
 }					t_model;
 
@@ -85,7 +87,8 @@ typedef struct		s_env
 	int				win_h;
 }					t_env;
 
-t_model				*init_model();
+t_model				*init_model(void);
+void				init_matrices(t_model model);
 void				init_window(GLFWwindow **win, int *win_w, int *win_h,
 					char *model_name);
 

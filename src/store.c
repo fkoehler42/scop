@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:27:37 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/07 17:48:15 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/11 15:29:04 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,9 @@ void	store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx)
 		return ;
 	}
 	if (!(array[vtx_idx] = (t_vec3*)malloc(sizeof(t_vec3))))
-	{
-		put_error(ALLOC, NULL);
-		exit(EXIT_FAILURE);
-	}
-	while (--i > 0)
-		array[vtx_idx]->v[i - 1] = strtof(data[i], NULL);
+		exit_error(ALLOC, NULL);
+	*(array[vtx_idx]) = new_vec3(strtof(data[1], NULL),
+	strtof(data[2], NULL), strtof(data[3], NULL));
 	vtx_idx++;
 }
 
