@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/07 11:54:25 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/11 17:15:11 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/11 18:41:06 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 NAME = libmat.a
 
 SRC =	mat_mul.c \
+		mat_rotate.c \
 		new_mat.c \
 		new_vec.c
 

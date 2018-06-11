@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 17:28:07 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/11 18:40:34 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct		s_env
 }					t_env;
 
 t_model				*init_model(void);
-void				init_matrices(t_model model);
+void				init_matrices(t_model *model);
 void				init_window(GLFWwindow **win, int *win_w, int *win_h,
 					char *model_name);
 
