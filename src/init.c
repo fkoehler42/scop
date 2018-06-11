@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 18:37:40 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/11 19:19:39 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,17 @@ t_model	*init_model(void)
 	return (model);
 }
 
-void	init_matrices(t_model *model)
+void	init_matrices(t_env env)
 {
-	if (!(model->translate = (t_mat4*)malloc(sizeof(t_mat4))))
+	if (!(env.mvp = (t_mat4*)malloc(sizeof(t_mat4))))
 		exit_error(ALLOC, NULL);
-	*(model->translate) = new_mat4(MAT_IDENTITY);
-	if (!(model->rotate = (t_mat4*)malloc(sizeof(t_mat4))))
+	*(env.mvp) = new_mat4(0);
+	if (!(env.model->translate = (t_mat4*)malloc(sizeof(t_mat4))))
 		exit_error(ALLOC, NULL);
-	*(model->rotate) = mat4_rotate(new_mat4(MAT_IDENTITY), 90, Z_AXIS);
+	*(env.model->translate) = new_mat4(MAT_IDENTITY);
+	if (!(env.model->rotate = (t_mat4*)malloc(sizeof(t_mat4))))
+		exit_error(ALLOC, NULL);
+	*(env.model->rotate) = mat4_rotate(new_mat4(MAT_IDENTITY), 90, Y_AXIS);
 }
 
 void	init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)

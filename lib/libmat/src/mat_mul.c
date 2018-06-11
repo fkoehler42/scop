@@ -6,11 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 16:30:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 18:38:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/11 19:15:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
+
+#include <stdio.h>
 
 t_mat4		mat4_mul(t_mat4 m1, t_mat4 m2)
 {

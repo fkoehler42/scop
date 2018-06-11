@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 17:27:30 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/11 19:17:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ int		main(int ac, char **av)
 	env.model = init_model();
 	if (handle_file(av[1], env.model) < 0)
 		return (EXIT_FAILURE);
-	init_matrices(env.model);
+	init_matrices(env);
 	init_window(&(env.window), &(env.win_w), &(env.win_h), env.model->name);
 	env.gl_objs = generate_gl_objs(env.model);
+	GLuint matrix_id = glGetUniformLocation(env.gl_objs->shader_prog, "MVP");
 	while (!glfwWindowShouldClose(env.window))
 	{
 		glUseProgram(env.gl_objs->shader_prog);
+		//*(env.mvp) = mat4_mul(*(env.model->translate), *(env.model->rotate));
+		glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &(env.model->rotate->m[0]));
 		glBindVertexArray(env.gl_objs->vao);
 		glDrawElements(GL_TRIANGLES, env.gl_objs->nb_elems, GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(env.window);
