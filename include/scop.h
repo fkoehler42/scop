@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 17:33:38 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 19:45:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,12 @@ typedef struct		s_file_buf
 	ssize_t			str_len;
 }					t_buffer;
 
-typedef struct		s_face
-{
-	unsigned int	*v_id;
-	unsigned int	nb_vtx;
-}					t_face;
-
 typedef struct		s_model
 {
 	unsigned int	nb_vtx;
 	unsigned int	nb_face;
 	t_vec3			**v_array;
-	t_face			**f_array;
+	unsigned int	**f_array;
 	t_mat4			translate;
 	t_mat4			rotate;
 	t_mat4			scale;
@@ -97,7 +91,7 @@ void				init_window(GLFWwindow **win, int *win_w, int *win_h,
 
 int					handle_file(char *path, t_model *model);
 void				store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx);
-void				store_face(char **data, t_face **array, unsigned int *nb_face);
+void				store_face(char **data, unsigned int **array, unsigned int *nb_face);
 
 t_gl_objs			*generate_gl_objs(t_model *model);
 unsigned int		generate_shader_program(unsigned int vertex_shader,

@@ -6,29 +6,28 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 18:38:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 19:51:02 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static unsigned int	generate_ebo(t_face **faces, unsigned int nb_faces,
-unsigned int nb_elems)
+static unsigned int	generate_ebo(unsigned int **faces, unsigned int nb_faces)
 {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	k;
 	unsigned int	ebo;
-	unsigned int	indices[nb_elems];
+	unsigned int	indices[nb_faces * 3];
 
 	i = 0;
 	j = 0;
 	while (i < nb_faces)
 	{
 		k = 0;
-		while (k < faces[i]->nb_vtx)
+		while (k < 3)
 		{
-			indices[j] = faces[i]->v_id[k];
+			indices[j] = faces[i][k];
 			j++;
 			k++;
 		}
@@ -38,22 +37,6 @@ unsigned int nb_elems)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW); 
 	return (ebo);
-}
-
-
-static unsigned int	compute_ebo_size(t_face **faces, unsigned int nb_faces)
-{
-	unsigned int	i;
-	unsigned int	nb_elems;
-
-	i = 0;
-	nb_elems = 0;
-	while (i < nb_faces)
-	{
-		nb_elems += faces[i]->nb_vtx;
-		i++;
-	}
-	return (nb_elems);
 }
 
 static unsigned int	generate_vbo(t_vec3 **vec, unsigned int nb_vtx)
@@ -92,8 +75,7 @@ t_gl_objs			*generate_gl_objs(t_model *model)
 	glGenVertexArrays(1, &(gl_objs->vao));
 	glBindVertexArray(gl_objs->vao);
 	gl_objs->vbo = generate_vbo(model->v_array, model->nb_vtx);
-	gl_objs->nb_elems = compute_ebo_size(model->f_array, model->nb_face);
-	gl_objs->ebo = generate_ebo(model->f_array, model->nb_face, gl_objs->nb_elems);
+	gl_objs->ebo = generate_ebo(model->f_array, model->nb_face);
 	gl_objs->vtx_shader = generate_shader(VTX_SHADER, GL_VERTEX_SHADER);
 	gl_objs->frag_shader = generate_shader(FRAG_SHADER, GL_FRAGMENT_SHADER);
 	gl_objs->shader_prog = generate_shader_program(gl_objs->vtx_shader,
