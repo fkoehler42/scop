@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/06/11 13:41:07 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/06/14 12:18:28 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =	error.c \
 		gl_objs.c \
 		init.c \
 		main.c \
+		matrix.c \
 		parse.c \
 		shader.c \
 		store.c \

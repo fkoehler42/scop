@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 16:03:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 13:54:05 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 15:35:05 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ t_mat4			*mat4_dup(t_mat4 src);
 
 t_mat4			mat4_mul(t_mat4 m1, t_mat4 m2);
 t_mat4			mat4_rotate(t_mat4 m, float angle, t_axis axis);
+t_mat4			mat4_scale(t_mat4 m, float coeff);
 
 #endif

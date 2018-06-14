@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/07 17:55:55 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 18:38:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ unsigned int nb_elems)
 	}
 	glGenBuffers(1, &ebo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW); 
 	return (ebo);
 }
 
@@ -79,7 +79,7 @@ static unsigned int	generate_vbo(t_vec3 **vec, unsigned int nb_vtx)
 	}
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 	return (vbo);
 }
 
@@ -102,5 +102,6 @@ t_gl_objs			*generate_gl_objs(t_model *model)
 	gl_objs->frag_shader = 0;
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)0); // normalization needed ? (GL_TRUE)
 	glEnableVertexAttribArray(0);
+	gl_objs->mvp = glGetUniformLocation(gl_objs->shader_prog, "mvp");
 	return (gl_objs);
 }

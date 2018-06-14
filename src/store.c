@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:27:37 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 15:29:04 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 18:41:03 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx)
 	static unsigned int	vtx_idx = 0;
 	int			i;
 
-	//printf("nb de vertex : %u, index : %u\n", *nb_vtx, vtx_idx);
+	// printf("nb de vertex : %u, index : %u\n", *nb_vtx, vtx_idx);
 	i = 0;
 	while (data[i])
 		i++;
@@ -58,7 +58,7 @@ void	store_face(char **data, t_face **array, unsigned int *nb_face)
 	}
 	array[f_idx]->nb_vtx = i;
 	while (--i >= 0)
-		array[f_idx]->v_id[i] = ft_atoi(data[i + 1]);
+		array[f_idx]->v_id[i] = ft_atoi(data[i + 1]) - 1;
 	// printf("nb de faces : %1$u, index : %2$u, nb vtx sur face[%2$u] : %3$u\n", *nb_face, f_idx, array[f_idx]->nb_vtx);
 	f_idx++;
 }

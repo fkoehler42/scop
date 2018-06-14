@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 18:59:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 17:33:38 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ typedef struct		s_model
 	unsigned int	nb_face;
 	t_vec3			**v_array;
 	t_face			**f_array;
-	t_mat4			*translate;
-	t_mat4			*rotate;
+	t_mat4			translate;
+	t_mat4			rotate;
+	t_mat4			scale;
+	t_mat4			mvp;
 	char			*name;
 }					t_model;
 
@@ -76,12 +78,12 @@ typedef struct		s_gl_objs
 	unsigned int	frag_shader;
 	unsigned int	shader_prog;
 	unsigned int	nb_elems;
+	GLuint			mvp;
 }					t_gl_objs;
 
 typedef struct		s_env
 {
 	t_model			*model;
-	t_mat4			*mvp;
 	t_gl_objs		*gl_objs;
 	GLFWwindow		*window;
 	int				win_w;
@@ -89,7 +91,7 @@ typedef struct		s_env
 }					t_env;
 
 t_model				*init_model(void);
-void				init_matrices(t_env env);
+// void				init_matrices(t_env env);
 void				init_window(GLFWwindow **win, int *win_w, int *win_h,
 					char *model_name);
 
@@ -101,6 +103,7 @@ t_gl_objs			*generate_gl_objs(t_model *model);
 unsigned int		generate_shader_program(unsigned int vertex_shader,
 					unsigned int fragment_shader);
 unsigned int		generate_shader(char *shader_file, int shader_type);
+void				compute_mvp_matrix(t_model *model);
 
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);

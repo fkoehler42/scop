@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 19:17:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/14 18:01:44 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,23 @@ int		main(int ac, char **av)
 	env.model = init_model();
 	if (handle_file(av[1], env.model) < 0)
 		return (EXIT_FAILURE);
-	init_matrices(env);
+	// init_matrices(env);
 	init_window(&(env.window), &(env.win_w), &(env.win_h), env.model->name);
 	env.gl_objs = generate_gl_objs(env.model);
-	GLuint matrix_id = glGetUniformLocation(env.gl_objs->shader_prog, "MVP");
+	compute_mvp_matrix(env.model);
+	for (int i = 0; i < 16; i++)
+		printf("%f, ", env.model->mvp.m[i]);
 	while (!glfwWindowShouldClose(env.window))
 	{
+		glfwPollEvents();
+		glClearColor(0.09f, 0.08f, 0.15f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(env.gl_objs->shader_prog);
-		//*(env.mvp) = mat4_mul(*(env.model->translate), *(env.model->rotate));
-		glUniformMatrix4fv(matrix_id, 1, GL_FALSE, &(env.model->rotate->m[0]));
+		glUniformMatrix4fv(env.gl_objs->mvp, 1, GL_FALSE, env.model->mvp.m);
 		glBindVertexArray(env.gl_objs->vao);
 		glDrawElements(GL_TRIANGLES, env.gl_objs->nb_elems, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
 		glfwSwapBuffers(env.window);
-		glfwPollEvents();
 	}
 	// free allocated stuffs
 	glfwDestroyWindow(env.window);
