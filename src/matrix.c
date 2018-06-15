@@ -6,20 +6,23 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 12:25:21 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 19:57:27 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 18:33:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void			compute_mvp_matrix(t_model *model)
+void	demo_update(t_matrices *matrices)
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	model->scale = new_mat4(MAT_IDENTITY);
-	model->scale.m[0] = 0.5f;
-	model->scale.m[5] = 0.5f;
-	model->scale.m[10] = 0.5f;
-	model->rotate = mat4_rotate(new_mat4(MAT_IDENTITY), 30, Y_AXIS);
-	model->translate = new_mat4(MAT_IDENTITY);
-	model->mvp = mat4_mul(mat4_mul(model->scale, model->rotate), model->translate);
+	if (matrices->r_angle >= 359.99f)
+		matrices->r_angle = 0;
+	else
+		matrices->r_angle += 0.01f;
+	matrices->rotate = mat4_rotate(new_mat4(MAT_IDENTITY), matrices->r_angle,
+	Y_AXIS);
+	matrices->model = mat4_mul(mat4_mul(matrices->translate, matrices->rotate),
+	matrices->scale);
+	matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view),
+	matrices->proj);
+	matrices->mvp.m[15] = 1;
 }

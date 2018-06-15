@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 12:00:37 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 18:31:42 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,26 @@ t_model			*init_model(void)
 	return (model);
 }
 
-t_view_space	init_view_space(void)
+t_matrices	*init_matrices(int win_w, int win_h)
 {
-	t_view_space	*view_space;
+	t_matrices	*matrices;
 
-	if (!(view_space = (t_view_space*)malloc(sizeof(*view_space))))
+	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
-	view->space.fov = 60;
-	view_space->translate = new_mat4(MAT_IDENTITY);
-	view_space->rotate = new_mat4(MAT_IDENTITY);
-	view_space->scale = new_mat4(MAT_IDENTITY);
-	view_space->model = new_mat4(MAT_IDENTITY);
-	view_space->view = mat4_translate(new_mat4(MAT_IDENTITY),
+	matrices->fov = 90.0f;
+	matrices->r_angle = 0.0f;
+	matrices->translate = new_mat4(MAT_IDENTITY);
+	matrices->rotate = new_mat4(MAT_IDENTITY);
+	matrices->scale = mat4_scale(new_mat4(MAT_IDENTITY), 0.25f);
+	matrices->model = matrices->scale;
+	matrices->view = mat4_translate(new_mat4(MAT_IDENTITY),
 	new_vec3(-3.0f, 0.0f, 0.0f));
-	view_space->proj = new_mat4(MAT_IDENTITY);
-	view_space->mvp = new_mat4(MAT_IDENTITY);
+	matrices->proj = new_projection_mat4(matrices->fov, win_w / win_h, 0.1f, 100.0f);
+	matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view), matrices->proj);
+	matrices->mvp.m[15] = 1; // dirty trick to keep mvp[15] to 1
+	// for (int i = 0; i < 16; i++)
+	// 	printf("%f, ", matrices->mvp.m[i]);
+	return (matrices);
 }
 
 void			init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
