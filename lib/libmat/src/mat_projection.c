@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mat_mul.c                                          :+:      :+:    :+:   */
+/*   mat_projection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/11 16:30:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 18:27:38 by fkoehler         ###   ########.fr       */
+/*   Created: 2018/06/15 14:32:54 by fkoehler          #+#    #+#             */
+/*   Updated: 2018/06/15 18:25:32 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-#include <stdio.h>
-
-t_mat4		mat4_mul(t_mat4 m1, t_mat4 m2)
+t_mat4		new_projection_mat4(float fov, float aspect_ratio, float near, float far)
 {
-	int		x;
-	int		y;
-	int		z;
-	t_mat4	new;
+	t_mat4			new;
+	static float	deg_to_rad = PI_VALUE / 180;
+	float			x_scale;
+	float			y_scale;
 
-	x = -1;
-	while (++x < 4)
-	{
-		y = -1;
-		while (++y < 4)
-		{
-			new.m[x * 4 + y] = 0;
-			z = -1;
-			while (++z < 4)
-				new.m[x * 4 + y] += m1.m[x * 4 + z] * m2.m[z * 4 + y];
-		}
-	}
+	new = new_mat4(0);
+	y_scale = 1.0 / tan(deg_to_rad * fov / 2);
+	x_scale = y_scale / aspect_ratio;
+	new.m[0] = x_scale;
+	new.m[5] = y_scale;
+	new.m[10] = (far + near) / (near - far);
+	new.m[11] = -1;
+	new.m[14] = 2 * far * near / (near - far);
 	return (new);
 }

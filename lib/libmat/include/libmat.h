@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 16:03:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 11:54:16 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 14:43:20 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <math.h>
 
+# define PI_VALUE 3.14159265359
 # define MAT_IDENTITY 0x7FFFFFFF
 
 typedef enum	e_axis
@@ -45,6 +46,9 @@ t_vec4			new_vec4(float x, float y, float z, float w);
 
 t_mat4			new_mat4(float f);
 t_mat4			*mat4_dup(t_mat4 src);
+t_mat4			new_projection_mat4(float fov, float apect_ratio, float near,
+				float far);
+
 
 t_mat4			mat4_mul(t_mat4 m1, t_mat4 m2);
 t_mat4			mat4_rotate(t_mat4 m, float angle, t_axis axis);
