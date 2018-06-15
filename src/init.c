@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 18:31:42 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 18:37:52 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_matrices	*init_matrices(int win_w, int win_h)
 	matrices->r_angle = 0.0f;
 	matrices->translate = new_mat4(MAT_IDENTITY);
 	matrices->rotate = new_mat4(MAT_IDENTITY);
-	matrices->scale = mat4_scale(new_mat4(MAT_IDENTITY), 0.25f);
+	matrices->scale = mat4_scale(new_mat4(MAT_IDENTITY), 0.15f);
 	matrices->model = matrices->scale;
 	matrices->view = mat4_translate(new_mat4(MAT_IDENTITY),
 	new_vec3(-3.0f, 0.0f, 0.0f));

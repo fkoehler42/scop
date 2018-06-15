@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 18:28:36 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 19:47:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,9 @@ void				demo_update(t_matrices *matrices);
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);
 
+unsigned int		ft_strtoui(char *str);
+
 void				put_error(t_errnum err, char *str);
 void				exit_error(t_errnum err, char *str);
-
 
 #endif
