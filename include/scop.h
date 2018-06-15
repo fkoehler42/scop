@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 19:45:26 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 12:00:06 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,12 @@ typedef enum		e_errnum
 	SHADER_CREAT
 }					t_errnum;
 
-typedef struct		s_file_buf
-{
-	FILE			*fs;
-	char			*str;
-	size_t			str_cap;
-	ssize_t			str_len;
-}					t_buffer;
-
 typedef struct		s_model
 {
 	unsigned int	nb_vtx;
 	unsigned int	nb_face;
 	t_vec3			**v_array;
 	unsigned int	**f_array;
-	t_mat4			translate;
-	t_mat4			rotate;
-	t_mat4			scale;
-	t_mat4			mvp;
 	char			*name;
 }					t_model;
 
@@ -75,10 +63,23 @@ typedef struct		s_gl_objs
 	GLuint			mvp;
 }					t_gl_objs;
 
+typedef struct		s_view_space
+{
+	t_mat4			translate;
+	t_mat4			rotate;
+	t_mat4			scale;
+	t_mat4			model;
+	t_mat4			view;
+	t_mat4			proj;
+	t_mat4			mvp;
+	float			fov;
+}					t_view_space;
+
 typedef struct		s_env
 {
 	t_model			*model;
 	t_gl_objs		*gl_objs;
+	t_view_space	*view_space;
 	GLFWwindow		*window;
 	int				win_w;
 	int				win_h;

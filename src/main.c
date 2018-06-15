@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 19:57:55 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 11:28:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ int		main(int ac, char **av)
 	env.model = init_model();
 	if (handle_file(av[1], env.model) < 0)
 		return (EXIT_FAILURE);
-	// init_matrices(env);
+	env.view_space = init_view_space();
 	init_window(&(env.window), &(env.win_w), &(env.win_h), env.model->name);
 	env.gl_objs = generate_gl_objs(env.model);
 	compute_mvp_matrix(env.model);
-	// for (int i = 0; i < 16; i++)
-	// 	printf("%f, ", env.model->mvp.m[i]);
 	while (!glfwWindowShouldClose(env.window))
 	{
 		glfwPollEvents();

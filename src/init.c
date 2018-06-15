@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 17:52:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/15 12:00:37 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-t_model	*init_model(void)
+t_model			*init_model(void)
 {
 	t_model	*model;
 
@@ -22,31 +22,28 @@ t_model	*init_model(void)
 	model->nb_face = 0;
 	model->v_array = NULL;
 	model->f_array = NULL;
-	// model->translate = NULL;
-	// model->rotate = NULL;
-	// model->scale = NULL;
-	// model->mvp = NULL;
 	model->name = NULL;
 	return (model);
 }
 
-// void	init_matrices(t_env env)
-// {
-// 	if (!(env.mvp = (t_mat4*)malloc(sizeof(t_mat4))))
-// 		exit_error(ALLOC, NULL);
-// 	*(env.mvp) = new_mat4(0);
-// 	if (!(env.model->translate = (t_mat4*)malloc(sizeof(t_mat4))))
-// 		exit_error(ALLOC, NULL);
-// 	*(env.model->translate) = new_mat4(MAT_IDENTITY);
-// 	if (!(env.model->rotate = (t_mat4*)malloc(sizeof(t_mat4))))
-// 		exit_error(ALLOC, NULL);
-// 	*(env.model->rotate) = mat4_rotate(new_mat4(MAT_IDENTITY), 90, Y_AXIS);
-// 	if (!(env.model->scale = (t_mat4*)malloc(sizeof(t_mat4))))
-// 		exit_error(ALLOC, NULL);
-// 	*(env.model->scale) = new_mat4(0);
-// }
+t_view_space	init_view_space(void)
+{
+	t_view_space	*view_space;
 
-void	init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
+	if (!(view_space = (t_view_space*)malloc(sizeof(*view_space))))
+		exit_error(ALLOC, NULL);
+	view->space.fov = 60;
+	view_space->translate = new_mat4(MAT_IDENTITY);
+	view_space->rotate = new_mat4(MAT_IDENTITY);
+	view_space->scale = new_mat4(MAT_IDENTITY);
+	view_space->model = new_mat4(MAT_IDENTITY);
+	view_space->view = mat4_translate(new_mat4(MAT_IDENTITY),
+	new_vec3(-3.0f, 0.0f, 0.0f));
+	view_space->proj = new_mat4(MAT_IDENTITY);
+	view_space->mvp = new_mat4(MAT_IDENTITY);
+}
+
+void			init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
 {
 	int width;
 	int height;
