@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 19:47:49 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:02:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct		s_matrices
 	t_mat4			proj;
 	t_mat4			mvp;
 	float			fov;
-	float			r_angle;
+	// float			r_angles[3];
 }					t_matrices;
 
 typedef struct		s_env
@@ -87,6 +87,7 @@ typedef struct		s_env
 	int				demo;
 }					t_env;
 
+t_env				*init_env(void);
 t_model				*init_model(void);
 t_matrices			*init_matrices(int win_w, int win_h);
 void				init_window(GLFWwindow **win, int *win_w, int *win_h,
@@ -101,11 +102,13 @@ unsigned int		generate_shader_program(unsigned int vertex_shader,
 					unsigned int fragment_shader);
 unsigned int		generate_shader(char *shader_file, int shader_type);
 
-void				demo_update(t_matrices *matrices);
+void				mvp_update(t_matrices *matrices);
 
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);
 
+t_matrices			*get_matrices(t_matrices *matrices);
+t_env				*get_env_struct(t_env *env);
 unsigned int		ft_strtoui(char *str);
 
 void				put_error(t_errnum err, char *str);

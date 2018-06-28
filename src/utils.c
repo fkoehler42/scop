@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 19:38:57 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 19:49:13 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:05:21 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,22 @@ unsigned int	ft_strtoui(char *str)
 		i++;
 	val = strtoul(&(str[i]), NULL, 10);
 	return ((unsigned int)val);
+}
+
+t_matrices		*get_matrices()
+{
+	t_env	*env;
+
+	if (!(env = get_env_struct(NULL)))
+		return (NULL);
+	return (env->matrices);
+}
+
+t_env			*get_env_struct(t_env *env)
+{
+	static t_env	*save = NULL;
+
+	if (env != NULL)
+		save = env;
+	return (save);
 }

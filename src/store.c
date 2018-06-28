@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:27:37 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 19:51:54 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/28 13:19:57 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	store_face(char **data, unsigned int **array, unsigned int *nb_face)
 	}
 	while (--i >= 0)
 		array[f_idx][i] = ft_strtoui(data[i + 1]) - 1;
-	printf("nb de faces : %1$u, index : %2$u, 1st vec idx : %3$u\n", *nb_face, f_idx, array[f_idx][0]);
+	// printf("nb de faces : %1$u, index : %2$u, 1st vec idx : %3$u\n", *nb_face, f_idx, array[f_idx][0]);
 	f_idx++;
 }

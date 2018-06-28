@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 18:37:52 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:05:33 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,28 @@ t_model			*init_model(void)
 	return (model);
 }
 
+t_env			*init_env(void)
+{
+	t_env	*env;
+
+	if (!(env = (t_env*)malloc(sizeof(*env))))
+		exit_error(ALLOC, NULL);
+	get_env_struct(env);
+	env->demo = 1;
+	env->model = init_model();
+	return (env);
+}
+
 t_matrices	*init_matrices(int win_w, int win_h)
 {
 	t_matrices	*matrices;
 
 	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
-	matrices->fov = 90.0f;
-	matrices->r_angle = 0.0f;
+	matrices->fov = 80.0f;
+	// matrices->r_angles[0] = 0.0f;
+	// matrices->r_angles[1] = 0.0f;
+	// matrices->r_angles[2] = 0.0f;
 	matrices->translate = new_mat4(MAT_IDENTITY);
 	matrices->rotate = new_mat4(MAT_IDENTITY);
 	matrices->scale = mat4_scale(new_mat4(MAT_IDENTITY), 0.15f);
