@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/28 16:05:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/28 19:54:57 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_model			*init_model(void)
 	model->v_array = NULL;
 	model->f_array = NULL;
 	model->name = NULL;
+	model->center_point[0] = 0.0f;
+	model->center_point[1] = 0.0f;
+	model->center_point[2] = 0.0f;
 	return (model);
 }
 
@@ -44,7 +47,7 @@ t_matrices	*init_matrices(int win_w, int win_h)
 
 	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
-	matrices->fov = 80.0f;
+	matrices->fov = 60.0f;
 	// matrices->r_angles[0] = 0.0f;
 	// matrices->r_angles[1] = 0.0f;
 	// matrices->r_angles[2] = 0.0f;
@@ -52,8 +55,9 @@ t_matrices	*init_matrices(int win_w, int win_h)
 	matrices->rotate = new_mat4(MAT_IDENTITY);
 	matrices->scale = mat4_scale(new_mat4(MAT_IDENTITY), 0.15f);
 	matrices->model = matrices->scale;
-	matrices->view = mat4_translate(new_mat4(MAT_IDENTITY),
-	new_vec3(-3.0f, 0.0f, 0.0f));
+	// matrices->view = mat4_translate(new_mat4(MAT_IDENTITY),
+	// new_vec3(-1.0f, 0.0f, 0.0f));
+	matrices->view = new_mat4(MAT_IDENTITY);
 	matrices->proj = new_projection_mat4(matrices->fov, win_w / win_h, 0.1f, 100.0f);
 	matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view), matrices->proj);
 	matrices->mvp.m[15] = 1; // dirty trick to keep mvp[15] to 1

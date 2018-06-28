@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/28 16:02:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/06/28 19:44:58 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_model
 	unsigned int	nb_face;
 	t_vec3			**v_array;
 	unsigned int	**f_array;
+	float			center_point[3];
 	char			*name;
 }					t_model;
 
@@ -110,6 +111,7 @@ void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 t_matrices			*get_matrices(t_matrices *matrices);
 t_env				*get_env_struct(t_env *env);
 unsigned int		ft_strtoui(char *str);
+float				median_float(float min, float max);
 
 void				put_error(t_errnum err, char *str);
 void				exit_error(t_errnum err, char *str);
