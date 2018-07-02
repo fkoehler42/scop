@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/28 19:44:58 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/02 11:08:06 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ unsigned int		generate_shader_program(unsigned int vertex_shader,
 					unsigned int fragment_shader);
 unsigned int		generate_shader(char *shader_file, int shader_type);
 
+void				center_model(t_vec3 **v_array, unsigned int nb_vtx, float *center_point);
 void				mvp_update(t_matrices *matrices);
 
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
