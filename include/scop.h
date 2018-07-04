@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 18:09:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:34:52 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct		s_gl_objs
 	unsigned int	nb_elems;
 	GLint			mvp;
 	GLint			interpolate;
-	GLint			wireframe;
 	GLint			color;
 	GLint			y_gradient;
 }					t_gl_objs;

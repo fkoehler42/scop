@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 18:09:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:19:35 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_render_opts *render_opts, GLfloat *mvp_address)
 {
 	glUniformMatrix4fv(gl_objs->mvp, 1, GL_FALSE, mvp_address);
 	glUniform1i(gl_objs->interpolate, render_opts->interpolate);
-	glUniform1i(gl_objs->wireframe, render_opts->wireframe);
 	glUniform1i(gl_objs->color, render_opts->color);
 	glUniform1i(gl_objs->y_gradient, render_opts->y_gradient);
 }
@@ -27,8 +26,6 @@ static void			bind_uniform_locations(t_gl_objs *gl_objs)
 	if ((gl_objs->mvp = glGetUniformLocation(gl_objs->shader_prog, "mvp")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
 	if ((gl_objs->interpolate = glGetUniformLocation(gl_objs->shader_prog, "interpolate")) == -1)
-		exit_error(UNIFORM_VAR, NULL);
-	if ((gl_objs->wireframe = glGetUniformLocation(gl_objs->shader_prog, "wireframe")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
 	if ((gl_objs->color = glGetUniformLocation(gl_objs->shader_prog, "color")) == -1)
 		exit_error(UNIFORM_VAR, NULL);

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 18:00:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:40:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int			main(int ac, char **av)
 	init_window(&(env->window), &(env->win_w), &(env->win_h), env->model->name);
 	env->matrices = init_matrices(env->win_w, env->win_h);
 	env->gl_objs = generate_gl_objs(env->model);
-	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // nice debug display
 	rendering_loop(env);
 	// free allocated stuffs
 	glfwDestroyWindow(env->window);

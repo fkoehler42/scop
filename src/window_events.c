@@ -6,18 +6,30 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 17:36:46 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:37:47 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static void	switch_demo_state(t_env *env)
+static void	switch_option_state(t_env *env, int key)
 {
-	if (env->render_opts->demo == 1)
-		env->render_opts->demo = 0;
-	else
-		env->render_opts->demo = 1;
+	if (key == GLFW_KEY_1)
+		env->render_opts->demo = env->render_opts->demo == 1 ? 0 : 1;
+	if (key == GLFW_KEY_2)
+	{
+		env->render_opts->wireframe = env->render_opts->wireframe == 1 ? 0 : 1;
+		if (env->render_opts->wireframe == 1)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	if (key == GLFW_KEY_3)
+		env->render_opts->interpolate = env->render_opts->interpolate == 1 ? 0 : 1;
+	if (key == GLFW_KEY_4)
+		env->render_opts->color = env->render_opts->color == 1 ? 0 : 1;
+	if (key == GLFW_KEY_5)
+		env->render_opts->y_gradient = env->render_opts->y_gradient == 1 ? 0 : 1;
 }
 
 void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
@@ -56,6 +68,6 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 	if (key == GLFW_KEY_E)
 		matrices->view = mat4_translate(matrices->view, new_vec3(0, 0, -0.1f));
 	mvp_update(matrices);
-	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
-		switch_demo_state(get_env_struct(NULL));
+	if ((key >= GLFW_KEY_1 && key <= GLFW_KEY_5) && action == GLFW_PRESS)
+		switch_option_state(get_env_struct(NULL), key);
 }
