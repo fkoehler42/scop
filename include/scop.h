@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 16:32:23 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:09:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef enum		e_errnum
 	MODEL_DATA,
 	GLFW_INIT,
 	WIN_CREAT,
-	SHADER_CREAT
+	SHADER_CREAT,
+	UNIFORM_VAR
 }					t_errnum;
 
 typedef struct		s_model
@@ -61,17 +62,20 @@ typedef struct		s_gl_objs
 	unsigned int	frag_shader;
 	unsigned int	shader_prog;
 	unsigned int	nb_elems;
-	GLuint			mvp;
+	GLint			mvp;
+	GLint			interpolate;
+	GLint			wireframe;
+	GLint			color;
+	GLint			y_gradient;
 }					t_gl_objs;
 
 typedef struct		s_render_opts
 {
-	int				smooth;
-	int				line;
-	int				grey_y;
-	int				grey_rand;
-	int				color_y;
-	int				color_rand;
+	int				demo;
+	int				interpolate;
+	int				wireframe;
+	int				color;
+	int				y_gradient;
 }					t_render_opts;
 
 typedef struct		s_matrices
@@ -96,7 +100,6 @@ typedef struct		s_env
 	t_render_opts	*render_opts;
 	int				win_w;
 	int				win_h;
-	int				demo;
 }					t_env;
 
 t_env				*init_env(void);
@@ -116,6 +119,8 @@ unsigned int		generate_shader(char *shader_file, int shader_type);
 
 void				center_model(t_vec3 **v_array, unsigned int nb_vtx, float *center_point);
 void				mvp_update(t_matrices *matrices);
+void				gl_objs_update(t_gl_objs *gl_objs,
+					t_render_opts *render_opts, GLfloat *mvp_address);
 
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);

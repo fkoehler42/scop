@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 16:32:15 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:08:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ static t_render_opts	*init_render_opts(void)
 
 	if (!(render_opts = (t_render_opts*)malloc(sizeof(*render_opts))))
 		exit_error(ALLOC, NULL);
-	render_opts->smooth = 0;
-	render_opts->line = 0;
-	render_opts->grey_y = 1;
-	render_opts->grey_rand = 0;
-	render_opts->color_y = 0;
-	render_opts->color_rand = 0;
+	render_opts->demo = 1;
+	render_opts->interpolate = 0;
+	render_opts->wireframe = 0;
+	render_opts->color = 0;
+	render_opts->y_gradient = 1;
 	return (render_opts);
 }
 
@@ -51,7 +50,6 @@ t_env					*init_env(void)
 	if (!(env = (t_env*)malloc(sizeof(*env))))
 		exit_error(ALLOC, NULL);
 	get_env_struct(env);
-	env->demo = 1;
 	env->model = init_model();
 	env->render_opts = init_render_opts();
 	return (env);

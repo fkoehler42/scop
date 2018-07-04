@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 12:04:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 17:36:46 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	switch_demo_state(t_env *env)
 {
-	if (env->demo == 1)
-		env->demo = 0;
+	if (env->render_opts->demo == 1)
+		env->render_opts->demo = 0;
 	else
-		env->demo = 1;
+		env->render_opts->demo = 1;
 }
 
 void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
