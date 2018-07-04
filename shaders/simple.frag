@@ -1,8 +1,11 @@
 #version 400 core
 
+smooth in vec4 smooth_color;
+flat in vec4 flat_color;
+
 out vec4 FragColor;
 
 void main()
 {
-	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+	FragColor = flat_color;
 }

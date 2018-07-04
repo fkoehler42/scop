@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/02 11:08:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 16:32:23 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ typedef struct		s_gl_objs
 	GLuint			mvp;
 }					t_gl_objs;
 
+typedef struct		s_render_opts
+{
+	int				smooth;
+	int				line;
+	int				grey_y;
+	int				grey_rand;
+	int				color_y;
+	int				color_rand;
+}					t_render_opts;
+
 typedef struct		s_matrices
 {
 	t_mat4			translate;
@@ -83,13 +93,14 @@ typedef struct		s_env
 	t_gl_objs		*gl_objs;
 	t_matrices		*matrices;
 	GLFWwindow		*window;
+	t_render_opts	*render_opts;
 	int				win_w;
 	int				win_h;
 	int				demo;
 }					t_env;
 
 t_env				*init_env(void);
-t_model				*init_model(void);
+// t_model				*init_model(void);
 t_matrices			*init_matrices(int win_w, int win_h);
 void				init_window(GLFWwindow **win, int *win_w, int *win_h,
 					char *model_name);

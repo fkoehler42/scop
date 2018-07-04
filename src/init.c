@@ -6,13 +6,28 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 13:00:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 16:32:15 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-t_model			*init_model(void)
+static t_render_opts	*init_render_opts(void)
+{
+	t_render_opts	*render_opts;
+
+	if (!(render_opts = (t_render_opts*)malloc(sizeof(*render_opts))))
+		exit_error(ALLOC, NULL);
+	render_opts->smooth = 0;
+	render_opts->line = 0;
+	render_opts->grey_y = 1;
+	render_opts->grey_rand = 0;
+	render_opts->color_y = 0;
+	render_opts->color_rand = 0;
+	return (render_opts);
+}
+
+static t_model			*init_model(void)
 {
 	t_model	*model;
 
@@ -29,7 +44,7 @@ t_model			*init_model(void)
 	return (model);
 }
 
-t_env			*init_env(void)
+t_env					*init_env(void)
 {
 	t_env	*env;
 
@@ -38,10 +53,11 @@ t_env			*init_env(void)
 	get_env_struct(env);
 	env->demo = 1;
 	env->model = init_model();
+	env->render_opts = init_render_opts();
 	return (env);
 }
 
-t_matrices	*init_matrices(int win_w, int win_h)
+t_matrices				*init_matrices(int win_w, int win_h)
 {
 	t_matrices	*matrices;
 
@@ -68,7 +84,7 @@ t_matrices	*init_matrices(int win_w, int win_h)
 	return (matrices);
 }
 
-void			init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
+void					init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
 {
 	int width;
 	int height;
