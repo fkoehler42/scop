@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/02 11:18:01 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/04 13:00:59 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_matrices	*init_matrices(int win_w, int win_h)
 
 	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
-	matrices->fov = 60.0f;
+	matrices->fov = 90.0f;
 	// matrices->r_angles[0] = 0.0f;
 	// matrices->r_angles[1] = 0.0f;
 	// matrices->r_angles[2] = 0.0f;
@@ -59,8 +59,10 @@ t_matrices	*init_matrices(int win_w, int win_h)
 	// new_vec3(-1.0f, 0.0f, 0.0f));
 	matrices->view = new_mat4(MAT_IDENTITY);
 	matrices->proj = new_projection_mat4(matrices->fov, win_w / win_h, 0.1f, 100.0f);
-	matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view), matrices->proj);
-	matrices->mvp.m[15] = 1; // dirty trick to keep mvp[15] to 1
+	mvp_update(matrices);
+	// matrices->mvp = mat4_mul(matrices->model, matrices->proj);
+	// matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view), matrices->proj);
+	// matrices->mvp.m[15] = 1; // dirty trick to keep mvp[15] to 1
 	// for (int i = 0; i < 16; i++)
 	// 	printf("%f, ", matrices->mvp.m[i]);
 	return (matrices);
