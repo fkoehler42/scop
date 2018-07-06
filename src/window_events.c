@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/06 11:56:48 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/06 14:12:13 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 		return ;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(win, 1);
-	if (key >= GLFW_KEY_RIGHT && key <= GLFW_KEY_PAGE_UP)
+	if (key >= GLFW_KEY_RIGHT && key <= GLFW_KEY_PAGE_DOWN)
 		rotate(get_matrices(NULL), key);
 	if (key == GLFW_KEY_A)
 		matrices->view = mat4_translate(matrices->view, new_vec3(-0.1f, 0, 0));
