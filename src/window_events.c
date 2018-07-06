@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 18:37:47 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/06 11:56:48 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,8 @@ static void	switch_option_state(t_env *env, int key)
 		env->render_opts->y_gradient = env->render_opts->y_gradient == 1 ? 0 : 1;
 }
 
-void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
+static void	rotate(t_matrices *matrices, int key)
 {
-	t_matrices	*matrices;
-
-	(void)scanc;
-	(void)mods;
-	matrices = get_matrices(NULL);
-	if (action == GLFW_RELEASE)
-		return ;
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(win, 1);
 	if (key == GLFW_KEY_UP)
 		matrices->rotate = mat4_rotate(matrices->rotate, 0.04f, X_AXIS);
 	if (key == GLFW_KEY_DOWN)
@@ -55,6 +46,21 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 		matrices->rotate = mat4_rotate(matrices->rotate, 0.04f, Z_AXIS);
 	if (key == GLFW_KEY_PAGE_DOWN)
 		matrices->rotate = mat4_rotate(matrices->rotate, -0.04f, Z_AXIS);
+}
+
+void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
+{
+	t_matrices	*matrices;
+
+	(void)scanc;
+	(void)mods;
+	matrices = get_matrices(NULL);
+	if (action == GLFW_RELEASE)
+		return ;
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(win, 1);
+	if (key >= GLFW_KEY_RIGHT && key <= GLFW_KEY_PAGE_UP)
+		rotate(get_matrices(NULL), key);
 	if (key == GLFW_KEY_A)
 		matrices->view = mat4_translate(matrices->view, new_vec3(-0.1f, 0, 0));
 	if (key == GLFW_KEY_D)
@@ -68,6 +74,6 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 	if (key == GLFW_KEY_E)
 		matrices->view = mat4_translate(matrices->view, new_vec3(0, 0, -0.1f));
 	mvp_update(matrices);
-	if ((key >= GLFW_KEY_1 && key <= GLFW_KEY_5) && action == GLFW_PRESS)
+	if (key >= GLFW_KEY_1 && key <= GLFW_KEY_5)
 		switch_option_state(get_env_struct(NULL), key);
 }

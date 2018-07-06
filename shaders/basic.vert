@@ -6,7 +6,6 @@ uniform int interpolate;
 uniform int color;
 uniform int y_gradient;
 
-
 smooth out vec4 smooth_color;
 flat out vec4 flat_color;
 
@@ -16,6 +15,8 @@ void main()
 	int avoid_unused_var_error = interpolate + color + y_gradient;
 
 	gl_Position = mvp * vec4(position.x, position.y, position.z, 1.0f);
-	smooth_color = vec4(merged_position, merged_position, merged_position, 1.0f);
-	flat_color = vec4(position, 1.0f);
+	if (interpolate == 1)
+		smooth_color = vec4(merged_position, merged_position, merged_position, 1.0f);
+	else
+		flat_color = vec4(position, 1.0f);
 }
