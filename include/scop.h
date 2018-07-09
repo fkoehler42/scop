@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 12:43:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:40:53 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ typedef struct		s_texture
 {
 	unsigned int	width;
 	unsigned int	height;
-	unsigned int	imgSize;
-	unsigned char	*src;
+	unsigned int	img_size;
+	unsigned char	*data;
+	unsigned int	data_offset;
 }					t_texture;
 
 typedef struct		s_model
@@ -73,11 +74,12 @@ typedef struct		s_gl_objs
 	unsigned int	frag_shader;
 	unsigned int	shader_prog;
 	unsigned int	nb_elems;
+	GLuint			tex_id;
 	GLint			mvp;
 	GLint			interpolate;
 	GLint			color;
 	GLint			gradient;
-	GLuint			texture;
+	GLint			tex_loc;
 }					t_gl_objs;
 
 typedef struct		s_render_opts
@@ -127,6 +129,7 @@ t_gl_objs			*generate_gl_objs(t_model *model);
 unsigned int		generate_shader_program(unsigned int vertex_shader,
 					unsigned int fragment_shader);
 unsigned int		generate_shader(char *shader_file, int shader_type);
+GLuint				load_texture(const char *filename);
 
 void				center_model(t_vec3 **v_array, unsigned int nb_vtx, float *center_point);
 void				mvp_update(t_matrices *matrices);

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 12:05:45 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:37:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	rendering_loop(t_env *env)
 	while (!glfwWindowShouldClose(env->window))
 	{
 		glfwPollEvents();
-		glClearColor(0.08maf, 0.08f, 0.15f, 1.0f);
+		glClearColor(0.08f, 0.08f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(env->gl_objs->shader_prog);
 		gl_objs_update(env->gl_objs, env->render_opts, env->matrices->mvp.m);
+		glBindTexture(GL_TEXTURE_2D, env->gl_objs->tex_id);
 		glBindVertexArray(env->gl_objs->vao);
 		glDrawElements(GL_TRIANGLES, env->model->nb_face * 3, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
@@ -47,6 +47,7 @@ int			main(int ac, char **av)
 	init_window(&(env->window), &(env->win_w), &(env->win_h), env->model->name);
 	env->matrices = init_matrices(env->win_w, env->win_h);
 	env->gl_objs = generate_gl_objs(env->model);
+	glUseProgram(env->gl_objs->shader_prog);
 	rendering_loop(env);
 	// free allocated stuffs
 	glfwDestroyWindow(env->window);

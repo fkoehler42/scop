@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 10:55:02 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/05 18:44:43 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 15:46:47 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ unsigned int fragment_shader)
 		glGetProgramInfoLog(shader_program_id, 512, NULL, error_log);
 		exit_error(SHADER_CREAT, error_log);
 	}
-	return (shader_program_id);
 	glDeleteShader(vertex_shader);
 	glDeleteShader(fragment_shader);
+	return (shader_program_id);
 }

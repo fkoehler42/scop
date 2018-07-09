@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 12:00:26 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:58:57 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void					init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
 	glViewport(0, 0, width, height);
 	*win_w = WIN_W;
 	*win_h = WIN_H;
+	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 }
