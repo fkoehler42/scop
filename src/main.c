@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 18:40:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 12:05:45 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	rendering_loop(t_env *env)
 	while (!glfwWindowShouldClose(env->window))
 	{
 		glfwPollEvents();
-		glClearColor(0.09f, 0.08f, 0.15f, 1.0f);
+		glClearColor(0.08maf, 0.08f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(env->gl_objs->shader_prog);
 		gl_objs_update(env->gl_objs, env->render_opts, env->matrices->mvp.m);

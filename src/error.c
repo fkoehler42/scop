@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:54:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 17:57:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 12:45:01 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	put_error(t_errnum err, char *str)
 	{
 		ft_putstr_fd("An error has occured during ", 2);
 		ft_putendl_fd("OpenGL uniform variables binding", 2);
+	}
+	else if (err == TEXTURE_LOAD)
+	{
+		ft_putstr_fd("Texture loading error, ", 2);
+		ft_putendl(str, 2);
 	}
 }
 

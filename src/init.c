@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/06 13:14:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 12:00:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_render_opts	*init_render_opts(void)
 	render_opts->interpolate = 0;
 	render_opts->wireframe = 0;
 	render_opts->color = 0;
-	render_opts->y_gradient = 1;
+	render_opts->gradient = 1;
 	return (render_opts);
 }
 

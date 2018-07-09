@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/04 18:34:52 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 12:43:33 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "../lib/libmat/include/libmat.h"
 # include <stdio.h>
 # include <GLFW/glfw3.h>
+
+# define BMP_HEADER_SIZE 54
 
 # define WIN_W 1024
 # define WIN_H 768
@@ -40,8 +42,17 @@ typedef enum		e_errnum
 	GLFW_INIT,
 	WIN_CREAT,
 	SHADER_CREAT,
-	UNIFORM_VAR
+	UNIFORM_VAR,
+	TEXTURE_LOAD
 }					t_errnum;
+
+typedef struct		s_texture
+{
+	unsigned int	width;
+	unsigned int	height;
+	unsigned int	imgSize;
+	unsigned char	*src;
+}					t_texture;
 
 typedef struct		s_model
 {
@@ -65,7 +76,8 @@ typedef struct		s_gl_objs
 	GLint			mvp;
 	GLint			interpolate;
 	GLint			color;
-	GLint			y_gradient;
+	GLint			gradient;
+	GLuint			texture;
 }					t_gl_objs;
 
 typedef struct		s_render_opts
@@ -74,7 +86,7 @@ typedef struct		s_render_opts
 	int				interpolate;
 	int				wireframe;
 	int				color;
-	int				y_gradient;
+	int				gradient;
 }					t_render_opts;
 
 typedef struct		s_matrices

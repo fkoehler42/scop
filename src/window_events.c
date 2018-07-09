@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/06 14:12:13 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/09 11:52:31 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	switch_option_state(t_env *env, int key)
 	if (key == GLFW_KEY_4)
 		env->render_opts->color = env->render_opts->color == 1 ? 0 : 1;
 	if (key == GLFW_KEY_5)
-		env->render_opts->y_gradient = env->render_opts->y_gradient == 1 ? 0 : 1;
+		env->render_opts->gradient = env->render_opts->gradient == 1 ? 0 : 1;
 }
 
 static void	rotate(t_matrices *matrices, int key)

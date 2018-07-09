@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 14:13:45 by fkoehler          #+#    #+#              #
-#    Updated: 2018/07/02 11:09:29 by fkoehler         ###   ########.fr        #
+#    Updated: 2018/07/09 12:07:18 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC =	error.c \
 		parse.c \
 		shader.c \
 		store.c \
+		texture.c \
 		utils.c \
 		window_events.c
 
