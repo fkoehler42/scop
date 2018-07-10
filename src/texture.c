@@ -6,23 +6,18 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 12:06:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 19:14:03 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 11:14:45 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static void		get_texture_data(t_texture *texture, const char *filename)
+static void		read_bmp_file_header(t_texture *texture, const char *filepath)
 {
 	FILE				*fs;
 	char				header[BMP_HEADER_SIZE];
-	char				*final_path;
-	static const char	tex_dir[] = "../textures/";
-	// unsigned int test = 0;
 
-	if (!(final_path = ft_strjoin(tex_dir, filename)))
-		exit_error(ALLOC, NULL);
-	if (!(fs = fopen(final_path, "r")))
+	if (!(fs = fopen(file_path, "r")))
 		exit_error(OPEN, final_path);
 	if (fread(header, 1, BMP_HEADER_SIZE, fs) != BMP_HEADER_SIZE
 	|| header[0] != 'B' || header[1] != 'M')
@@ -34,16 +29,25 @@ static void		get_texture_data(t_texture *texture, const char *filename)
 		exit_error(TEXTURE_LOAD, NULL);
 	if (!(texture->img_size = *(int*)&(header[0x22])))
 		texture->img_size = texture->width * texture->height * 3;
-	if (!(texture->data = (unsigned char*)malloc(sizeof(unsigned char) *
+	
+	if (!(texture->buff_data = (unsigned char*)malloc(sizeof(unsigned char) *
 	texture->img_size * 3)))
 		exit_error(ALLOC, NULL);
-	if (!(fread(texture->data, 1, texture->img_size * 3, fs)))
+	if (!(fread(texture->buff_data, 1, texture->img_size * 3, fs)))
 		exit_error(TEXTURE_LOAD, NULL);
-	// printf("data offset : %u, w : %", );
 	fclose(fs);
 }
 
-GLuint		load_texture(const char *filename)
+static void		get_texture_data(t_texture *texture, const char *filename)
+{
+	char				*full_path;
+
+	if (!(full_path = ft_strjoin("../textures/", filename)))
+		exit_error(ALLOC, NULL);
+	read_bmp_file_header(texture, full_path);
+}
+
+GLuint			load_texture(const char *filename)
 {
 	t_texture	*texture;
 	GLuint		texture_id;
