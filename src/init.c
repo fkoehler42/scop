@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 18:58:57 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 16:28:42 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_env					*init_env(void)
 	return (env);
 }
 
-t_matrices				*init_matrices(int win_w, int win_h)
+t_matrices				*init_matrices(void)
 {
 	t_matrices	*matrices;
 
@@ -72,7 +72,7 @@ t_matrices				*init_matrices(int win_w, int win_h)
 	// matrices->view = mat4_translate(new_mat4(MAT_IDENTITY),
 	// new_vec3(-1.0f, 0.0f, 0.0f));
 	matrices->view = new_mat4(MAT_IDENTITY);
-	matrices->proj = new_projection_mat4(matrices->fov, win_w / win_h, 0.1f, 100.0f);
+	matrices->proj = new_projection_mat4(matrices->fov, (float)WIN_W / (float)WIN_H, 0.1f, 100.0f);
 	mvp_update(matrices);
 	// matrices->mvp = mat4_mul(matrices->model, matrices->proj);
 	// matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view), matrices->proj);
@@ -82,11 +82,8 @@ t_matrices				*init_matrices(int win_w, int win_h)
 	return (matrices);
 }
 
-void					init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
+void					init_window(GLFWwindow **win, char *model_name)
 {
-	int width;
-	int height;
-	
 	if (!glfwInit())
 		exit_error(GLFW_INIT, NULL);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -98,10 +95,8 @@ void					init_window(GLFWwindow **win, int *win_w, int *win_h, char *model_name)
 		exit_error(WIN_CREAT, NULL);
 	glfwSetKeyCallback(*win, &key_callback);
 	glfwMakeContextCurrent(*win);
-	glfwGetFramebufferSize(*win, &width, &height);
-	glViewport(0, 0, width, height);
-	*win_w = WIN_W;
-	*win_h = WIN_H;
+	glfwGetFramebufferSize(*win, NULL, NULL);
+	glViewport(0, 0, WIN_W, WIN_H);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 }

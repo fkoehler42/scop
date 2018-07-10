@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 13:45:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 16:28:07 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,12 @@ typedef struct		s_env
 	t_matrices		*matrices;
 	GLFWwindow		*window;
 	t_render_opts	*render_opts;
-	int				win_w;
-	int				win_h;
 }					t_env;
 
 t_env				*init_env(void);
 // t_model				*init_model(void);
-t_matrices			*init_matrices(int win_w, int win_h);
-void				init_window(GLFWwindow **win, int *win_w, int *win_h,
-					char *model_name);
+t_matrices			*init_matrices(void);
+void				init_window(GLFWwindow **win, char *model_name);
 
 int					handle_file(char *path, t_model *model);
 void				store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx);
