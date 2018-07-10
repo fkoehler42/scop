@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 11:52:31 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 16:56:53 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	switch_option_state(t_env *env, int key)
 		env->render_opts->color = env->render_opts->color == 1 ? 0 : 1;
 	if (key == GLFW_KEY_5)
 		env->render_opts->gradient = env->render_opts->gradient == 1 ? 0 : 1;
+	if (key == GLFW_KEY_6)
+		env->render_opts->texture = env->render_opts->texture == 1 ? 0 : 1;
 }
 
 static void	rotate(t_matrices *matrices, int key)
@@ -74,6 +76,6 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 	if (key == GLFW_KEY_E)
 		matrices->view = mat4_translate(matrices->view, new_vec3(0, 0, -0.1f));
 	mvp_update(matrices);
-	if (key >= GLFW_KEY_1 && key <= GLFW_KEY_5)
+	if (key >= GLFW_KEY_1 && key <= GLFW_KEY_6)
 		switch_option_state(get_env_struct(NULL), key);
 }

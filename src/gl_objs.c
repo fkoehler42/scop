@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 15:56:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 16:57:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_render_opts *render_opts, GLfloat *mvp_address)
 	glUniform1i(gl_objs->interpolate, render_opts->interpolate);
 	glUniform1i(gl_objs->color, render_opts->color);
 	glUniform1i(gl_objs->gradient, render_opts->gradient);
-	glUniform1i(gl_objs->tex_loc, gl_objs->tex_id);
+	glUniform1i(gl_objs->tex_loc, render_opts->texture);
 }
 
 static void			bind_uniform_locations(t_gl_objs *gl_objs)
@@ -32,8 +32,8 @@ static void			bind_uniform_locations(t_gl_objs *gl_objs)
 		exit_error(UNIFORM_VAR, NULL);
 	if ((gl_objs->gradient = glGetUniformLocation(gl_objs->shader_prog, "gradient")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	// if ((gl_objs->tex_loc = glGetUniformLocation(gl_objs->shader_prog, "kitty_texture")) == -1)
-	// 	exit_error(UNIFORM_VAR, NULL);
+	if ((gl_objs->tex_loc = glGetUniformLocation(gl_objs->shader_prog, "texturing")) == -1)
+		exit_error(UNIFORM_VAR, NULL);
 }
 
 static unsigned int	generate_ebo(unsigned int **faces, unsigned int nb_faces)
