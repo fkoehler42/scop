@@ -11,9 +11,12 @@ out vec4 FragColor;
 
 void main()
 {
+	vec4 test;
+
 	if (interpolate == 1)
-		FragColor = smooth_color;
+		test = smooth_color;
 	else
-		FragColor = flat_color;
+		test = flat_color;
+	
 	FragColor = texture(kitty_texture, tex_coordinates);
 }

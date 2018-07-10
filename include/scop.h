@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 11:53:29 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 13:45:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct		s_texture
 	unsigned int	img_size;
 	unsigned short	bpp;
 	unsigned char	*buff_data;
-	unsigned char	*data;
+	unsigned char	*img_data;
 	unsigned int	data_offset;
 }					t_texture;
 

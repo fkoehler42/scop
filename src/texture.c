@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 12:06:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 12:20:37 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 15:25:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static void		read_bmp_file_header(t_texture *texture, const char *file_path)
+static void		read_bmp_file_data(t_texture *texture, const char *file_path)
 {
 	FILE				*fs;
 	char				header[BMP_HEADER_SIZE];
@@ -35,19 +35,49 @@ static void		read_bmp_file_header(t_texture *texture, const char *file_path)
 	if (!(texture->buff_data = (unsigned char*)malloc(sizeof(unsigned char) *
 	texture->img_size)))
 		exit_error(ALLOC, NULL);
-	if (!(fread(texture->buff_data, 1, texture->img_size, fs)))
+	if ((fread(texture->buff_data, 1, texture->img_size, fs)) != texture->img_size)
 		exit_error(TEXTURE_LOAD, NULL);
 	// printf("\noffset : %u\nwidth : %u\nheight : %u\nbits per pixel : %hu\nimg size : %u\n", texture->data_offset, texture->width, texture->height, texture->bpp, texture->img_size);
 	fclose(fs);
 }
 
-static void		get_texture_data(t_texture *texture, const char *filename)
+static unsigned char	*reverse_img_data(unsigned char *buff, unsigned int img_size,
+unsigned int line_size)
+{
+	unsigned int	h;
+	unsigned int	j;
+	unsigned char	*img_data;
+
+	h = 0;
+	if (!(img_data = (unsigned char*)malloc(sizeof(unsigned char) * img_size)))
+		exit_error(ALLOC, NULL);
+	while (img_size > 0)
+	{
+		img_size -= line_size;
+		j = 0;
+		while (j < line_size)
+		{
+			img_data[h + j] = buff[img_size + j + 2];
+			img_data[h + j + 1] = buff[img_size + j + 1];
+			img_data[h + j + 2] = buff[img_size + j];
+			j += 3;
+		}
+		h += line_size;
+	}
+	return (img_data);
+}
+
+static void				get_texture_data(t_texture *texture, const char *filename)
 {
 	char				*full_path;
 
 	if (!(full_path = ft_strjoin("../textures/", filename)))
 		exit_error(ALLOC, NULL);
-	read_bmp_file_header(texture, full_path);
+	read_bmp_file_data(texture, full_path);
+	ft_strdel(&full_path);
+	texture->img_data = reverse_img_data(texture->buff_data, texture->img_size,
+	texture->width * (texture->bpp / 8));
+	ft_strdel((char**)&texture->buff_data);
 }
 
 GLuint			load_texture(const char *filename)
@@ -60,16 +90,16 @@ GLuint			load_texture(const char *filename)
 	get_texture_data(texture, filename);
 	glGenTextures(1, &texture_id);
 	glBindTexture(GL_TEXTURE_2D, texture_id);
-	glActiveTexture(GL_TEXTURE0);
+	// glActiveTexture(GL_TEXTURE0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture->width, texture->height, 0,
-	GL_RGB, GL_UNSIGNED_BYTE, texture->buff_data);
-	glGenerateMipmap(GL_TEXTURE_2D);
+	GL_RGB, GL_UNSIGNED_BYTE, texture->img_data);
+	// glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	ft_strdel((char **)&texture->buff_data);
+	ft_strdel((char **)&texture->img_data);
 	free(texture);
 	return (texture_id);
 }
