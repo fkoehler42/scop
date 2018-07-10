@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:54:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/09 13:59:02 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/10 11:42:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	put_error(t_errnum err, char *str)
+void	put_error(t_errnum err, const char *str)
 {
 	ft_putstr_fd("scop: ", 2);
 	if (err == NB_ARG)
@@ -42,7 +42,7 @@ void	put_error(t_errnum err, char *str)
 	}
 }
 
-void	exit_error(t_errnum err, char *str)
+void	exit_error(t_errnum err, const char *str)
 {
 	put_error(err, str);
 	exit(EXIT_FAILURE);
