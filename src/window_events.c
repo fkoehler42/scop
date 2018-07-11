@@ -56,13 +56,13 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 
 	(void)scanc;
 	(void)mods;
-	matrices = get_matrices(NULL);
+	matrices = get_matrices();
 	if (action == GLFW_RELEASE)
 		return ;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(win, 1);
 	if (key >= GLFW_KEY_RIGHT && key <= GLFW_KEY_PAGE_DOWN)
-		rotate(get_matrices(NULL), key);
+		rotate(get_matrices(), key);
 	if (key == GLFW_KEY_A)
 		matrices->view = mat4_translate(matrices->view, new_vec3(-0.1f, 0, 0));
 	if (key == GLFW_KEY_D)

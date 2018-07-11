@@ -41,7 +41,7 @@ float			median_float(float min, float max)
 	return (0.0f);
 }
 
-t_matrices		*get_matrices()
+t_matrices		*get_matrices(void)
 {
 	t_env	*env;
 

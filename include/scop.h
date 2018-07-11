@@ -139,7 +139,7 @@ void				gl_objs_update(t_gl_objs *gl_objs,
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);
 
-t_matrices			*get_matrices(t_matrices *matrices);
+t_matrices			*get_matrices(void);
 t_env				*get_env_struct(t_env *env);
 unsigned int		ft_strtoui(char *str);
 float				median_float(float min, float max);
