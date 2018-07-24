@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 16:50:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 14:09:47 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static t_model			*init_model(void)
 	model->v_array = NULL;
 	model->f_array = NULL;
 	model->name = NULL;
-	model->center_point[0] = 0.0f;
-	model->center_point[1] = 0.0f;
-	model->center_point[2] = 0.0f;
+	model->center_points[0] = 0.0f;
+	model->center_points[1] = 0.0f;
+	model->center_points[2] = 0.0f;
+	model->max_coord_interval = 0.0f;
 	return (model);
 }
 
@@ -56,28 +57,19 @@ t_env					*init_env(void)
 	return (env);
 }
 
-t_matrices				*init_matrices(void)
+t_matrices				*init_matrices(float coord_interval)
 {
 	t_matrices	*matrices;
 
 	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
 	matrices->fov = 90.0f;
-	// matrices->r_angles[0] = 0.0f;
-	// matrices->r_angles[1] = 0.0f;
-	// matrices->r_angles[2] = 0.0f;
-	matrices->translate = new_mat4(MAT_IDENTITY);
+	matrices->translate = mat4_translate(new_mat4(MAT_IDENTITY), new_vec3(0, 0, -coord_interval));
 	matrices->rotate = new_mat4(MAT_IDENTITY);
-	matrices->scale = mat4_scale(new_mat4(MAT_IDENTITY), 0.15f);
-	matrices->model = matrices->scale;
-	// matrices->view = mat4_translate(new_mat4(MAT_IDENTITY),
-	// new_vec3(-1.0f, 0.0f, 0.0f));
+	matrices->scale = new_mat4(MAT_IDENTITY);
 	matrices->view = new_mat4(MAT_IDENTITY);
 	matrices->proj = new_projection_mat4(matrices->fov, (float)WIN_W / (float)WIN_H, 0.1f, 100.0f);
 	mvp_update(matrices);
-	// matrices->mvp = mat4_mul(matrices->model, matrices->proj);
-	// matrices->mvp = mat4_mul(mat4_mul(matrices->model, matrices->view), matrices->proj);
-	// matrices->mvp.m[15] = 1; // dirty trick to keep mvp[15] to 1
 	// for (int i = 0; i < 16; i++)
 	// 	printf("%f, ", matrices->mvp.m[i]);
 	return (matrices);

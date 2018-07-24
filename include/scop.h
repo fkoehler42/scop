@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 16:52:53 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 13:07:24 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct		s_model
 	unsigned int	nb_face;
 	t_vec3			**v_array;
 	unsigned int	**f_array;
-	float			center_point[3];
+	float			center_points[3];
+	float			max_coord_interval;
 	char			*name;
 }					t_model;
 
@@ -104,7 +105,6 @@ typedef struct		s_matrices
 	t_mat4			proj;
 	t_mat4			mvp;
 	float			fov;
-	// float			r_angles[3];
 }					t_matrices;
 
 typedef struct		s_env
@@ -117,8 +117,7 @@ typedef struct		s_env
 }					t_env;
 
 t_env				*init_env(void);
-// t_model				*init_model(void);
-t_matrices			*init_matrices(void);
+t_matrices			*init_matrices(float coord_interval);
 void				init_window(GLFWwindow **win, char *model_name);
 
 int					handle_file(char *path, t_model *model);
@@ -131,7 +130,7 @@ unsigned int		generate_shader_program(unsigned int vertex_shader,
 unsigned int		generate_shader(char *shader_file, int shader_type);
 GLuint				load_texture(const char *filename);
 
-void				center_model(t_vec3 **v_array, unsigned int nb_vtx, float *center_point);
+void				set_model_pos_infos(t_model *model);
 void				mvp_update(t_matrices *matrices);
 void				gl_objs_update(t_gl_objs *gl_objs,
 					t_render_opts *render_opts, GLfloat *mvp_address);
@@ -142,7 +141,7 @@ void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 t_matrices			*get_matrices(void);
 t_env				*get_env_struct(t_env *env);
 unsigned int		ft_strtoui(char *str);
-float				median_float(float min, float max);
+// float				median_float(float min, float max);
 
 void				put_error(t_errnum err, const char *str);
 void				exit_error(t_errnum err, const char *str);

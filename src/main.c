@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 16:29:14 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 13:05:37 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ int			main(int ac, char **av)
 	env = init_env();
 	if (handle_file(av[1], env->model) < 0)
 		return (EXIT_FAILURE);
-	center_model(env->model->v_array, env->model->nb_vtx, env->model->center_point);
+	set_model_pos_infos(env->model);
 	init_window(&(env->window), env->model->name);
-	env->matrices = init_matrices();
+	env->matrices = init_matrices(env->model->max_coord_interval);
 	env->gl_objs = generate_gl_objs(env->model);
 	rendering_loop(env);
-	// free allocated stuffs
 	glfwDestroyWindow(env->window);
 	glfwTerminate();
 	return (0);

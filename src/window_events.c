@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 16:56:53 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 14:04:06 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static void	rotate(t_matrices *matrices, int key)
 
 void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 {
-	t_matrices	*matrices;
+	t_matrices	*mat;
 
 	(void)scanc;
 	(void)mods;
-	matrices = get_matrices();
+	mat = get_matrices();
 	if (action == GLFW_RELEASE)
 		return ;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -64,18 +64,18 @@ void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
 	if (key >= GLFW_KEY_RIGHT && key <= GLFW_KEY_PAGE_DOWN)
 		rotate(get_matrices(), key);
 	if (key == GLFW_KEY_A)
-		matrices->view = mat4_translate(matrices->view, new_vec3(-0.1f, 0, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(-0.1f, 0, 0));
 	if (key == GLFW_KEY_D)
-		matrices->view = mat4_translate(matrices->view, new_vec3(0.1f, 0, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0.1f, 0, 0));
 	if (key == GLFW_KEY_W)
-		matrices->view = mat4_translate(matrices->view, new_vec3(0, 0.1f, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0.1f, 0));
 	if (key == GLFW_KEY_S)
-		matrices->view = mat4_translate(matrices->view, new_vec3(0, -0.1f, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, -0.1f, 0));
 	if (key == GLFW_KEY_Q)
-		matrices->view = mat4_translate(matrices->view, new_vec3(0, 0, 0.1f));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0, 0.1f));
 	if (key == GLFW_KEY_E)
-		matrices->view = mat4_translate(matrices->view, new_vec3(0, 0, -0.1f));
-	mvp_update(matrices);
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0, -0.1f));
+	mvp_update(mat);
 	if (key >= GLFW_KEY_1 && key <= GLFW_KEY_6)
 		switch_option_state(get_env_struct(NULL), key);
 }

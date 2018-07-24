@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 19:38:57 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/28 19:55:18 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 12:42:46 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ unsigned int	ft_strtoui(char *str)
 	return ((unsigned int)val);
 }
 
-float			median_float(float min, float max)
-{
-	float tmp;
+// float			median_float(float min, float max)
+// {
+// 	float tmp;
 
-	if (min <= 0.0f && max <= 0.0f)
-	{
-		tmp = (min - max) / 2;
-		return (max + tmp);
-	}
-	else
-	{
-		tmp = (max - min) / 2;
-		return (min + tmp);
-	}
-	return (0.0f);
-}
+// 	if (min <= 0.0f && max <= 0.0f)
+// 	{
+// 		tmp = (min - max) / 2;
+// 		return (max + tmp);
+// 	}
+// 	else
+// 	{
+// 		tmp = (max - min) / 2;
+// 		return (min + tmp);
+// 	}
+// 	return (0.0f);
+// }
 
 t_matrices		*get_matrices(void)
 {

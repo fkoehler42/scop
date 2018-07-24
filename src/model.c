@@ -6,39 +6,74 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 11:06:51 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/02 11:07:45 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 13:33:00 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	center_model(t_vec3 **v_array, unsigned int nb_vtx, float *center_point)
+static void		get_min_max(t_vec3 **v_array, unsigned int nb_vtx,
+float *min_max, unsigned int i)
+{
+	unsigned int	j;
+
+	j = 0;
+	min_max[0] = v_array[0]->v[i];
+	min_max[1] = v_array[0]->v[i];
+	while (j < nb_vtx)
+	{
+		if (v_array[j]->v[i] < min_max[0])
+			min_max[0] = v_array[j]->v[i];
+		else if (v_array[j]->v[i] > min_max[1])
+			min_max[1] = v_array[j]->v[i];
+		j++;
+	}
+}
+
+static void		set_interval_and_center_point(float *min_max,
+float *center_point, float *max_interval)
+{
+	float	interval;
+
+	if (min_max[0] <= 0.0f && min_max[1] <= 0.0f)
+	{
+		interval = min_max[0] - min_max[1];
+		*center_point = min_max[1] + (interval / 2);
+	}
+	else
+	{
+		interval = min_max[1] - min_max[0];
+		*center_point = min_max[0] + (interval / 2);
+	}
+	if (interval < 0.0f)
+		interval = -interval;
+	if (interval > *max_interval)
+		*max_interval = interval;
+}
+
+void	set_model_pos_infos(t_model *model)
 {
 	unsigned int	i;
-	unsigned int	j;
-	float			min;
-	float			max;
+	unsigned int	axis_idx;
+	float			min_max[2];
 
-	i = -1;
-	while (++i < 3)
+	i = 0;
+	axis_idx = 0;
+	while (axis_idx < 3)
 	{
-		j = -1;
-		min = v_array[0]->v[i];
-		max = v_array[0]->v[i];
-		while (++j < nb_vtx)
-		{
-			if (v_array[j]->v[i] < min)
-				min = v_array[j]->v[i];
-			else if (v_array[j]->v[i] > max)
-				max = v_array[j]->v[i];
-		}
-		center_point[i] = median_float(min, max);
+		get_min_max(model->v_array, model->nb_vtx, min_max, axis_idx);
+		set_interval_and_center_point(min_max,
+		&(model->center_points[axis_idx]), &(model->max_coord_interval));
+		axis_idx++;
 	}
-	j = -1;
-	while (++j < nb_vtx)
+	while (i < model->nb_vtx)
 	{
-		i = -1;
-		while (++i < 3)
-			v_array[j]->v[i] -= center_point[i];
+		axis_idx = 0;
+		while (axis_idx < 3)
+		{
+			model->v_array[i]->v[axis_idx] -= model->center_points[axis_idx];
+			axis_idx++;
+		}
+		i++;
 	}
 }
