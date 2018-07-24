@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 12:06:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 16:53:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:21:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void				get_texture_data(t_texture *texture, const char *filename)
 
 GLuint			load_texture(const char *filename)
 {
+	static int	texture_index = 0;
 	t_texture	*texture;
 	GLuint		texture_id;
 
@@ -89,15 +90,17 @@ GLuint			load_texture(const char *filename)
 		exit_error(ALLOC, NULL);
 	get_texture_data(texture, filename);
 	glGenTextures(1, &texture_id);
+	glActiveTexture(GL_TEXTURE0 + texture_index);
 	glBindTexture(GL_TEXTURE_2D, texture_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture->width, texture->height, 0,
 	GL_RGB, GL_UNSIGNED_BYTE, texture->img_data);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	// glBindTexture(GL_TEXTURE_2D, 0);
 	ft_strdel((char **)&texture->img_data);
 	free(texture);
+	texture_index++;
 	return (texture_id);
 }

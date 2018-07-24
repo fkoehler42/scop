@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/10 16:57:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:39:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void			bind_uniform_locations(t_gl_objs *gl_objs)
 		exit_error(UNIFORM_VAR, NULL);
 	if ((gl_objs->tex_loc = glGetUniformLocation(gl_objs->shader_prog, "texturing")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
+	glUniform1i(glGetUniformLocation(gl_objs->shader_prog, "kitten_texture"), 0);
+	glUniform1i(glGetUniformLocation(gl_objs->shader_prog, "fkoehler_texture"), 1);
 }
 
 static unsigned int	generate_ebo(unsigned int **faces, unsigned int nb_faces)
@@ -106,7 +108,8 @@ t_gl_objs			*generate_gl_objs(t_model *model)
 	gl_objs->frag_shader);
 	gl_objs->vtx_shader = 0;
 	gl_objs->frag_shader = 0;
-	gl_objs->tex_id = load_texture("chaton.bmp");
+	gl_objs->tex_id[0] = load_texture("chaton.bmp");
+	gl_objs->tex_id[1] = load_texture("fkoehler.bmp");
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 	glUseProgram(gl_objs->shader_prog);

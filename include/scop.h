@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 13:07:24 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:22:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct		s_gl_objs
 	unsigned int	frag_shader;
 	unsigned int	shader_prog;
 	unsigned int	nb_elems;
-	GLuint			tex_id;
+	GLuint			tex_id[2];
 	GLint			mvp;
 	GLint			interpolate;
 	GLint			color;
