@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 18:36:18 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 19:16:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,34 @@ static void	switch_option_state(t_env *env, int key)
 static void	rotate(t_matrices *matrices, int key)
 {
 	if (key == GLFW_KEY_UP)
-		matrices->rotate = mat4_rotate(matrices->rotate, 0.04f, X_AXIS);
+		matrices->rotate = mat4_rotate(matrices->rotate, 0.025f, X_AXIS);
 	if (key == GLFW_KEY_DOWN)
-		matrices->rotate = mat4_rotate(matrices->rotate, -0.04f, X_AXIS);
+		matrices->rotate = mat4_rotate(matrices->rotate, -0.025f, X_AXIS);
 	if (key == GLFW_KEY_LEFT)
-		matrices->rotate = mat4_rotate(matrices->rotate, 0.04f, Y_AXIS);
+		matrices->rotate = mat4_rotate(matrices->rotate, 0.025f, Y_AXIS);
 	if (key == GLFW_KEY_RIGHT)
-		matrices->rotate = mat4_rotate(matrices->rotate, -0.04f, Y_AXIS);
+		matrices->rotate = mat4_rotate(matrices->rotate, -0.025f, Y_AXIS);
 	if (key == GLFW_KEY_PAGE_UP)
-		matrices->rotate = mat4_rotate(matrices->rotate, 0.04f, Z_AXIS);
+		matrices->rotate = mat4_rotate(matrices->rotate, 0.025f, Z_AXIS);
 	if (key == GLFW_KEY_PAGE_DOWN)
-		matrices->rotate = mat4_rotate(matrices->rotate, -0.04f, Z_AXIS);
+		matrices->rotate = mat4_rotate(matrices->rotate, -0.025f, Z_AXIS);
 	mvp_update(matrices);
 }
 
 static void	translate(t_matrices *mat, int key)
 {
 	if (key == GLFW_KEY_A)
-		mat->translate = mat4_translate(mat->translate, new_vec3(-0.1f, 0, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(-0.07f, 0, 0));
 	if (key == GLFW_KEY_D)
-		mat->translate = mat4_translate(mat->translate, new_vec3(0.1f, 0, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0.07f, 0, 0));
 	if (key == GLFW_KEY_W)
-		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0.1f, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0.07f, 0));
 	if (key == GLFW_KEY_S)
-		mat->translate = mat4_translate(mat->translate, new_vec3(0, -0.1f, 0));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, -0.07f, 0));
 	if (key == GLFW_KEY_Q)
-		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0, 0.1f));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0, 0.07f));
 	if (key == GLFW_KEY_E)
-		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0, -0.1f));
+		mat->translate = mat4_translate(mat->translate, new_vec3(0, 0, -0.07f));
 	mvp_update(mat);
 }
 

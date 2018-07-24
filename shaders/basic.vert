@@ -25,5 +25,5 @@ void main()
 	else
 		smooth_color = vec4(mod(position.y, 0.8f), mod(position.y, 0.8f), mod(position.y, 0.8f), 1.0f);
 	flat_color = smooth_color;
-	tex_coordinates = vec2((normalized.x + normalized.z) / 2, normalized.y);
+	tex_coordinates = vec2((position.x + position.z), position.y * 2);
 }

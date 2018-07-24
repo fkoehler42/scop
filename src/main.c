@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 18:50:08 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/24 19:37:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	rendering_loop(t_env *env)
 	while (!glfwWindowShouldClose(env->window))
 	{
 		glfwPollEvents();
-		glClearColor(0.05, 0.15f, 0.05, 1.0f);
+		glClearColor(0.05f, 0.15f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(env->gl_objs->vao);
 		gl_objs_update(env->gl_objs, env->render_opts, env->matrices->mvp.m);
@@ -27,7 +27,7 @@ static void	rendering_loop(t_env *env)
 		if (env->render_opts->demo == 1)
 		{
 			env->matrices->rotate = mat4_rotate(env->matrices->rotate,
-			-0.02f, Y_AXIS);
+			-0.01f, Y_AXIS);
 			mvp_update(env->matrices);
 		}
 	}
