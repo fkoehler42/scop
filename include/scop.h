@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 13:25:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:35:11 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SCOP_H
 
 /*
-* Include <OpenGL/gl3.h> instead of <OpenGL/gl.h> in GLFW
+** Include <OpenGL/gl3.h> instead of <OpenGL/gl.h> in GLFW
 */
 # define GLFW_INCLUDE_GLCOREARB
 
@@ -124,8 +124,10 @@ t_matrices			*init_matrices(float coord_interval);
 void				init_window(GLFWwindow **win, char *model_name);
 
 void				handle_file(char *path, t_model *model);
-void				store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx);
-void				store_face(char **data, unsigned int **array, unsigned int *nb_face);
+void				store_vertex(char **data, t_vec3 **array,
+					unsigned int *nb_vtx);
+void				store_face(char **data, unsigned int **array,
+					unsigned int *nb_face);
 
 t_gl_objs			*generate_gl_objs(t_model *model);
 unsigned int		generate_shader_program(unsigned int vertex_shader,
@@ -138,8 +140,8 @@ void				mvp_update(t_matrices *matrices);
 void				gl_objs_update(t_gl_objs *gl_objs,
 					t_render_opts *render_opts, GLfloat *mvp_address);
 
-void				key_callback(GLFWwindow* win, int key, int scanc, int action,
-					int mods);
+void				key_callback(GLFWwindow *win, int key, int scanc,
+					int action, int mods);
 
 void				rotate(t_matrices *matrices, int key);
 void				translate(t_matrices *mat, int key);

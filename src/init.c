@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 13:00:25 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:01:10 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,17 @@ t_matrices				*init_matrices(float coord_interval)
 {
 	t_matrices	*matrices;
 
-	// printf("interval : %f\n", coord_interval);
 	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
 	matrices->fov = 90.0f;
-	matrices->translate = mat4_translate(new_mat4(MAT_IDENTITY), new_vec3(0, 0, (coord_interval * -0.75f)));
+	matrices->translate = mat4_translate(new_mat4(MAT_IDENTITY),
+	new_vec3(0, 0, (coord_interval * -0.75f)));
 	matrices->rotate = new_mat4(MAT_IDENTITY);
 	matrices->scale = new_mat4(MAT_IDENTITY);
 	matrices->view = new_mat4(MAT_IDENTITY);
-	matrices->proj = new_projection_mat4(matrices->fov, (float)WIN_W / (float)WIN_H, 0.1f, 100.0f);
+	matrices->proj = new_projection_mat4(matrices->fov,
+	(float)WIN_W / (float)WIN_H, 0.1f, 100.0f);
 	mvp_update(matrices);
-	// for (int i = 0; i < 16; i++)
-	// 	printf("%f, ", matrices->mvp.m[i]);
 	return (matrices);
 }
 

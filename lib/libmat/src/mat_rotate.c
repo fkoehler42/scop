@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 18:22:00 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 18:44:11 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:05:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ t_mat4			mat4_rotate(t_mat4 m, float angle, t_axis axis)
 	else if (axis == Z_AXIS)
 		new = mat4_mul(m, get_z_axis_rotation_mat4(angle));
 	else
-		new = new_mat4(0); // handle error case properly
+		new = m;
 	return (new);
 }

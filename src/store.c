@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:27:37 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 12:58:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:02:41 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx)
 {
 	static unsigned int	vtx_idx = 0;
-	int			i;
+	int					i;
 
-	// printf("nb de vertex : %u, index : %u\n", *nb_vtx, vtx_idx);
 	i = 0;
 	while (data[i])
 		i++;
-	if (i != 4) {
+	if (i != 4)
+	{
 		put_error(UNSUPPORTED, "A vertex");
 		free(array[*nb_vtx - 1]);
 		(*nb_vtx)--;
@@ -37,7 +37,7 @@ void	store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx)
 void	store_face(char **data, unsigned int **array, unsigned int *nb_face)
 {
 	static unsigned int	f_idx = 0;
-	int			i;
+	int					i;
 
 	i = 0;
 	while (data[i])
@@ -60,6 +60,5 @@ void	store_face(char **data, unsigned int **array, unsigned int *nb_face)
 	}
 	while (--i >= 0)
 		array[f_idx][i] = ft_strtoui(data[i + 1]) - 1;
-	// printf("nb de faces : %1$u, index : %2$u, 1st vec idx : %3$u\n", *nb_face, f_idx, array[f_idx][0]);
 	f_idx++;
 }

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 12:24:55 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:06:05 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	rendering_loop(t_env *env)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(env->gl_objs->vao);
 		gl_objs_update(env->gl_objs, env->render_opts, env->matrices->mvp.m);
-		glDrawElements(GL_TRIANGLES, env->model->nb_face * 3, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, env->model->nb_face * 3,
+		GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		glfwSwapBuffers(env->window);
 		if (env->render_opts->demo == 1)

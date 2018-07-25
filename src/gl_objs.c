@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 13:04:34 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:05:47 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,28 @@ t_render_opts *render_opts, GLfloat *mvp_address)
 
 static void			bind_uniform_locations(t_gl_objs *gl_objs)
 {
-	if ((gl_objs->mvp = glGetUniformLocation(gl_objs->shader_prog, "mvp")) == -1)
+	if ((gl_objs->mvp =
+	glGetUniformLocation(gl_objs->shader_prog, "mvp")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	if ((gl_objs->interpolate = glGetUniformLocation(gl_objs->shader_prog, "interpolate")) == -1)
+	if ((gl_objs->interpolate =
+	glGetUniformLocation(gl_objs->shader_prog, "interpolate")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	if ((gl_objs->color = glGetUniformLocation(gl_objs->shader_prog, "color")) == -1)
+	if ((gl_objs->color =
+	glGetUniformLocation(gl_objs->shader_prog, "color")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	if ((gl_objs->gradient = glGetUniformLocation(gl_objs->shader_prog, "gradient")) == -1)
+	if ((gl_objs->gradient =
+	glGetUniformLocation(gl_objs->shader_prog, "gradient")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	if ((gl_objs->tex_loc = glGetUniformLocation(gl_objs->shader_prog, "texturing")) == -1)
+	if ((gl_objs->tex_loc =
+	glGetUniformLocation(gl_objs->shader_prog, "texturing")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	if ((gl_objs->light_loc = glGetUniformLocation(gl_objs->shader_prog, "ambient_light")) == -1)
+	if ((gl_objs->light_loc =
+	glGetUniformLocation(gl_objs->shader_prog, "ambient_light")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
-	glUniform1i(glGetUniformLocation(gl_objs->shader_prog, "kitten_texture"), 0);
-	glUniform1i(glGetUniformLocation(gl_objs->shader_prog, "fkoehler_texture"), 1);
+	glUniform1i(glGetUniformLocation(gl_objs->shader_prog,
+	"kitten_texture"), 0);
+	glUniform1i(glGetUniformLocation(gl_objs->shader_prog,
+	"fkoehler_texture"), 1);
 }
 
 static unsigned int	generate_ebo(unsigned int **faces, unsigned int nb_faces)
@@ -64,7 +72,8 @@ static unsigned int	generate_ebo(unsigned int **faces, unsigned int nb_faces)
 	}
 	glGenBuffers(1, &ebo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW); 
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
+	GL_DYNAMIC_DRAW);
 	return (ebo);
 }
 
@@ -113,7 +122,8 @@ t_gl_objs			*generate_gl_objs(t_model *model)
 	gl_objs->frag_shader = 0;
 	gl_objs->tex_id[0] = load_texture("chaton.bmp");
 	gl_objs->tex_id[1] = load_texture("fkoehler.bmp");
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
+	(GLvoid*)0);
 	glEnableVertexAttribArray(0);
 	glUseProgram(gl_objs->shader_prog);
 	bind_uniform_locations(gl_objs);

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 16:04:25 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/11 18:38:32 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:03:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_mat4		new_mat4(float f)
 	t_mat4	new;
 
 	i = -1;
-
 	while (++i < 16)
 	{
 		if (f == MAT_IDENTITY)

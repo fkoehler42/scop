@@ -6,13 +6,14 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 14:32:54 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/15 18:25:32 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:00:50 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_mat4		new_projection_mat4(float fov, float aspect_ratio, float near, float far)
+t_mat4		new_projection_mat4(float fov, float aspect_ratio, float near,
+float far)
 {
 	t_mat4			new;
 	static float	deg_to_rad = PI_VALUE / 180;

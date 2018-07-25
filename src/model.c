@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 11:06:51 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 13:33:00 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:06:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ float *center_point, float *max_interval)
 		*max_interval = interval;
 }
 
-void	set_model_pos_infos(t_model *model)
+void			set_model_pos_infos(t_model *model)
 {
 	unsigned int	i;
 	unsigned int	axis_idx;

@@ -6,13 +6,27 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:54:11 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 12:20:18 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:59:14 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	put_error(t_errnum err, const char *str)
+static void	put_error2(t_errnum err, const char *str)
+{
+	if (err == TEXTURE_LOAD)
+	{
+		ft_putstr_fd("Texture loading error: ", 2);
+		ft_putendl_fd("source is a not a well formated .bmp file", 2);
+	}
+	else if (err == UNSUPPORTED)
+	{
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(" has been ignored (format not supported)", 2);
+	}
+}
+
+void		put_error(t_errnum err, const char *str)
 {
 	ft_putstr_fd("scop: ", 2);
 	if (err == NB_ARG)
@@ -35,19 +49,11 @@ void	put_error(t_errnum err, const char *str)
 		ft_putstr_fd("An error has occured during ", 2);
 		ft_putendl_fd("OpenGL uniform variables binding", 2);
 	}
-	else if (err == TEXTURE_LOAD)
-	{
-		ft_putstr_fd("Texture loading error: ", 2);
-		ft_putendl_fd("source is a not a well formated .bmp file", 2);
-	}
-	else if (err == UNSUPPORTED)
-	{
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd(" has been ignored (format not supported)", 2);
-	}
+	else
+		put_error2(err, str);
 }
 
-void	exit_error(t_errnum err, const char *str)
+void		exit_error(t_errnum err, const char *str)
 {
 	put_error(err, str);
 	exit(EXIT_FAILURE);

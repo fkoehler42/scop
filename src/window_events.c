@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 17:18:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 13:30:48 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:36:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static void	switch_option_state(t_env *env, int key)
 		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
-	if (key == GLFW_KEY_3)
-		env->render_opts->interpolate = env->render_opts->interpolate == 1 ? 0 : 1;
+	if (key == GLFW_KEY_3 && env->render_opts->interpolate == 1)
+		env->render_opts->interpolate = 0;
+	else if (key == GLFW_KEY_3 && env->render_opts->interpolate == 0)
+		env->render_opts->interpolate = 1;
 	if (key == GLFW_KEY_4)
 		env->render_opts->color = env->render_opts->color == 1 ? 0 : 1;
 	if (key == GLFW_KEY_5)
@@ -43,10 +45,10 @@ static void	change_ambient_light(t_env *env, int key)
 {
 	if (key == GLFW_KEY_KP_SUBTRACT &&
 	env->render_opts->ambient_light > 0.0f)
-		env->render_opts->ambient_light -= 0.01f;
+		env->render_opts->ambient_light -= 0.02f;
 	if (key == GLFW_KEY_KP_ADD &&
-	env->render_opts->ambient_light < 5.0f)
-		env->render_opts->ambient_light += 0.01f;
+	env->render_opts->ambient_light < 4.0f)
+		env->render_opts->ambient_light += 0.02f;
 }
 
 static void	reset_rendering(t_env *env)
@@ -64,7 +66,8 @@ static void	reset_rendering(t_env *env)
 	mvp_update(env->matrices);
 }
 
-void		key_callback(GLFWwindow* win, int key, int scanc, int action, int mods)
+void		key_callback(GLFWwindow *win, int key, int scanc, int action,
+int mods)
 {
 	(void)scanc;
 	(void)mods;
