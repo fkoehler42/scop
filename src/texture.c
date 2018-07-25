@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 12:06:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 15:09:34 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 16:38:05 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ const char *filename)
 {
 	char				*full_path;
 
-	if (!(full_path = ft_strjoin("../textures/", filename)))
+	if (!(full_path = ft_strjoin("./textures/", filename)))
 		exit_error(ALLOC, NULL);
 	read_bmp_file_data(texture, full_path);
 	ft_strdel(&full_path);

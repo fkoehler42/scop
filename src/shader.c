@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 10:55:02 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/25 15:07:04 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 16:38:02 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char		*get_shader_src(char *src_file)
 {
 	FILE				*fs;
 	long				size;
-	static const char	shader_dir[] = "../shaders/";
+	static const char	shader_dir[] = "./shaders/";
 	char				*final_path;
 	char				*shader_src;
 
