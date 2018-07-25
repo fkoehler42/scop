@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:14:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 14:09:47 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 13:00:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_render_opts	*init_render_opts(void)
 	render_opts->color = 0;
 	render_opts->gradient = 1;
 	render_opts->texture = 0;
+	render_opts->ambient_light = 1.0f;
 	return (render_opts);
 }
 
@@ -61,10 +62,11 @@ t_matrices				*init_matrices(float coord_interval)
 {
 	t_matrices	*matrices;
 
+	// printf("interval : %f\n", coord_interval);
 	if (!(matrices = (t_matrices*)malloc(sizeof(*matrices))))
 		exit_error(ALLOC, NULL);
 	matrices->fov = 90.0f;
-	matrices->translate = mat4_translate(new_mat4(MAT_IDENTITY), new_vec3(0, 0, -coord_interval));
+	matrices->translate = mat4_translate(new_mat4(MAT_IDENTITY), new_vec3(0, 0, (coord_interval * -0.75f)));
 	matrices->rotate = new_mat4(MAT_IDENTITY);
 	matrices->scale = new_mat4(MAT_IDENTITY);
 	matrices->view = new_mat4(MAT_IDENTITY);

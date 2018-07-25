@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:14:47 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/14 19:53:25 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 12:28:43 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,27 +78,25 @@ static void	parse_file(FILE *fs, unsigned int *nb_vtx, unsigned int *nb_face)
 		exit_error(MODEL_DATA, NULL);
 }
 
-int			handle_file(char *path, t_model *model)
+void		handle_file(char *path, t_model *model)
 {
 	FILE	*fs;
 
 	if (!(fs = fopen(path, "r")))
-	{
-		put_error(OPEN, path);
-		return (-1);
-	}
+		exit_error(OPEN, path);
 	parse_file(fs, &(model->nb_vtx), &(model->nb_face));
 	model->name = strrchr(path, '/') + 1;
-	model->v_array = (t_vec3**)malloc(sizeof(t_vec3*) * model->nb_vtx);
-	model->f_array = (unsigned int**)malloc(sizeof(unsigned int*) * model->nb_face);
+	if (!(model->v_array = (t_vec3**)malloc(sizeof(t_vec3*) * model->nb_vtx)))
+		exit_error(ALLOC, NULL);
+	if (!(model->f_array =
+	(unsigned int**)malloc(sizeof(unsigned int*) * model->nb_face)))
+		exit_error(ALLOC, NULL);
 	if (!model->v_array || !model->f_array)
 	{
-		put_error(ALLOC, NULL);
 		fclose(fs);
-		return (-1);
+		exit_error(ALLOC, NULL);
 	}
 	rewind(fs);
 	parse_data(fs, model);
 	fclose(fs);
-	return (0);
 }

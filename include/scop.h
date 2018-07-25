@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:18:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 18:22:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 13:25:33 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # define BMP_HEADER_SIZE 54
 
-# define WIN_W 1024
-# define WIN_H 768
+# define WIN_W 1600
+# define WIN_H 1200
 
 # define FRAG_SHADER "simple.frag"
 # define VTX_SHADER "basic.vert"
@@ -39,6 +39,7 @@ typedef enum		e_errnum
 	CLOSE,
 	ALLOC,
 	MODEL_DATA,
+	UNSUPPORTED,
 	GLFW_INIT,
 	WIN_CREAT,
 	SHADER_CREAT,
@@ -83,6 +84,7 @@ typedef struct		s_gl_objs
 	GLint			color;
 	GLint			gradient;
 	GLint			tex_loc;
+	GLint			light_loc;
 }					t_gl_objs;
 
 typedef struct		s_render_opts
@@ -93,6 +95,7 @@ typedef struct		s_render_opts
 	int				color;
 	int				gradient;
 	int				texture;
+	float			ambient_light;
 }					t_render_opts;
 
 typedef struct		s_matrices
@@ -120,7 +123,7 @@ t_env				*init_env(void);
 t_matrices			*init_matrices(float coord_interval);
 void				init_window(GLFWwindow **win, char *model_name);
 
-int					handle_file(char *path, t_model *model);
+void				handle_file(char *path, t_model *model);
 void				store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx);
 void				store_face(char **data, unsigned int **array, unsigned int *nb_face);
 
@@ -138,10 +141,12 @@ void				gl_objs_update(t_gl_objs *gl_objs,
 void				key_callback(GLFWwindow* win, int key, int scanc, int action,
 					int mods);
 
+void				rotate(t_matrices *matrices, int key);
+void				translate(t_matrices *mat, int key);
+
 t_matrices			*get_matrices(void);
 t_env				*get_env_struct(t_env *env);
 unsigned int		ft_strtoui(char *str);
-// float				median_float(float min, float max);
 
 void				put_error(t_errnum err, const char *str);
 void				exit_error(t_errnum err, const char *str);

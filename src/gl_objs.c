@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:53:26 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 18:39:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 13:04:34 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_render_opts *render_opts, GLfloat *mvp_address)
 	glUniform1i(gl_objs->color, render_opts->color);
 	glUniform1i(gl_objs->gradient, render_opts->gradient);
 	glUniform1i(gl_objs->tex_loc, render_opts->texture);
+	glUniform1f(gl_objs->light_loc, render_opts->ambient_light);
 }
 
 static void			bind_uniform_locations(t_gl_objs *gl_objs)
@@ -33,6 +34,8 @@ static void			bind_uniform_locations(t_gl_objs *gl_objs)
 	if ((gl_objs->gradient = glGetUniformLocation(gl_objs->shader_prog, "gradient")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
 	if ((gl_objs->tex_loc = glGetUniformLocation(gl_objs->shader_prog, "texturing")) == -1)
+		exit_error(UNIFORM_VAR, NULL);
+	if ((gl_objs->light_loc = glGetUniformLocation(gl_objs->shader_prog, "ambient_light")) == -1)
 		exit_error(UNIFORM_VAR, NULL);
 	glUniform1i(glGetUniformLocation(gl_objs->shader_prog, "kitten_texture"), 0);
 	glUniform1i(glGetUniformLocation(gl_objs->shader_prog, "fkoehler_texture"), 1);

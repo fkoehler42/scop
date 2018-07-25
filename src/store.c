@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 11:27:37 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/06/28 13:19:57 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 12:58:21 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	store_vertex(char **data, t_vec3 **array, unsigned int *nb_vtx)
 	while (data[i])
 		i++;
 	if (i != 4) {
-		ft_putendl_fd("scop: A vertex has been ignored (bad format)", 2);
+		put_error(UNSUPPORTED, "A vertex");
 		free(array[*nb_vtx - 1]);
 		(*nb_vtx)--;
 		return ;
@@ -44,7 +44,7 @@ void	store_face(char **data, unsigned int **array, unsigned int *nb_face)
 		i++;
 	if (i < 4 || i > 5)
 	{
-		ft_putendl_fd("scop: A face has been ignored (bad format)", 2);
+		put_error(UNSUPPORTED, "A face");
 		return ;
 	}
 	if (!(array[f_idx] = (unsigned int*)malloc(sizeof(unsigned int) * 3)))

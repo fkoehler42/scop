@@ -2,6 +2,7 @@
 
 uniform int interpolate;
 uniform int texturing;
+uniform float ambient_light;
 uniform sampler2D kitten_texture;
 uniform sampler2D fkoehler_texture;
 
@@ -21,4 +22,5 @@ void main()
 		FragColor = smooth_color;
 	else
 		FragColor = flat_color;
+	FragColor *= ambient_light;
 }

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:13:17 by fkoehler          #+#    #+#             */
-/*   Updated: 2018/07/24 19:37:56 by fkoehler         ###   ########.fr       */
+/*   Updated: 2018/07/25 12:24:55 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int			main(int ac, char **av)
 	if (ac != 2)
 		exit_error(NB_ARG, NULL);
 	env = init_env();
-	if (handle_file(av[1], env->model) < 0)
-		return (EXIT_FAILURE);
+	handle_file(av[1], env->model);
 	set_model_pos_infos(env->model);
 	init_window(&(env->window), env->model->name);
 	env->matrices = init_matrices(env->model->max_coord_interval);
